@@ -32,11 +32,11 @@
               <div class="company-tel"><i class="icon-tel"></i>马上联系<div class="company-tel-ways">
                   <div class="telephone">
                     <i class="icon-phone"></i>
-                    <span>0310-1234567</span>
+                    <a href="tel:18330820519">0310-1234567</a>
                   </div>
                   <div class="mobliephone">
                     <i class="icon-mobile"></i>
-                    <span>12345678910</span>
+                    <a href="tel:18330820519">18330820519</a>
                   </div>
                 </div>
               </div>

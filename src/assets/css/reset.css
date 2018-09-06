@@ -41,7 +41,10 @@ body {
   /* padding: 0 10px; */
   text-align: left;
 }
-
+a{
+  color:#000;
+  text-decoration: none;
+}
 select {
   font-size: 12px;
 }
