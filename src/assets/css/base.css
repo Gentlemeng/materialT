@@ -1,0 +1,25 @@
+.clear:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0
+}
+
+.clear {
+  zoom: 1
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
