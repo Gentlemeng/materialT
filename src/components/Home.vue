@@ -203,7 +203,7 @@ export default {
   height: 5%;
   background-color: #3367d6;
   color: #fff;
-  font-size: 0.06rem;
+  font-size: 12px;
 }
 .wel-box {
   width: 60%;
@@ -213,12 +213,12 @@ export default {
 .wel-text {
       width: 50%;
   height: 100%;
-  line-height: 30px;
+  line-height: 37.2px;
 }
 .contact {
       width: 50%;
   height: 100%;
-  line-height: 30px;
+  line-height: 37.2px;
 }
 
 .company-wx {
@@ -303,7 +303,7 @@ export default {
     width:40%;
     height: 100%;
     line-height: 300%;
-    font-size: 0.3rem;
+    font-size: 48px;
     color: #000;
     margin-left: 10%;
     font-family: monospace;

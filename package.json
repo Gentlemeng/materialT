@@ -13,6 +13,8 @@
   "dependencies": {
     "element-ui": "^2.4.6",
     "fullpage.js": "^3.0.2",
+    "lib-flexible": "^0.3.2",
+    "px2rem-loader": "^0.1.9",
     "vue": "^2.5.2",
     "vue-fullpage.js": "0.0.5",
     "vue-router": "^3.0.1"
