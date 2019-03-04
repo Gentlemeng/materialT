@@ -1,29 +1,36 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Home from '@/components/Home'
+import Index from '@/components/Index'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: "/",
-      name: "home",
-      component: Home,
+      redirect: '/index'
     },
     {
       path: '/home',
-      name: 'home',
-      component: Home,
+      component: resolve => require(['./../components/Index.vue'], resolve),
       children: [{
-          path: '/Intruduction',
-          component: resolve => require(['./../components/Intruduction.vue'], resolve)
+          path: '/home',
+          component: resolve => require(['./../components/Home.vue'], resolve)
+        }, {
+          path: '/company_introduce',
+          component: resolve => require(['./../components/Intruduce.vue'], resolve)
         },
-        // {
-        //   path: '/mapdata', 
-        //   component: resolve => require(['../components/page/MapData.vue'], resolve)
-        // },
+        {
+          path: '/products',
+          component: resolve => require(['../components/Products.vue'], resolve)
+        },
+        {
+          path: '/information',
+          component: resolve => require(['../components/Information.vue'], resolve)
+        },
+        {
+          path: '/contact',
+          component: resolve => require(['../components/Contact.vue'], resolve)
+        },
         // {
         //   path: '/treeshow',
         //   component: resolve => require(['../components/page/treeShow.vue'], resolve)
@@ -39,14 +46,9 @@ export default new Router({
       ]
     },
     {
-      path: "/business",
-      name:"home",
-      component:Home,
-    },
-    {
-      path: "/blank",
-      name: "home",
-      component: Home,
+      path: "/index",
+      name: "index",
+      component: Index,
     }
   ]
 })

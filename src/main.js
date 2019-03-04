@@ -4,7 +4,7 @@ import Vue from 'vue'
 import './assets/css/reset.css'
 import './assets/css/base.css'
 import 'element-ui/lib/theme-chalk/index.css';
-import 'lib-flexible/flexible'
+// import 'lib-flexible/flexible'
 import ElementUI from 'element-ui';
 import VueFullPage from 'vue-fullpage.js'
 
