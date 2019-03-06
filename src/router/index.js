@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/Index'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
       path: "/",
-      redirect: '/index'
+      redirect: '/home'
     },
     {
       path: '/home',
@@ -40,7 +39,7 @@ export default new Router({
     {
       path: "/index",
       name: "index",
-      component: Index,
+      redirect: '/home'
     },
     {
         path: "/business",

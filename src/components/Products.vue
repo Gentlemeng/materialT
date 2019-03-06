@@ -27,51 +27,8 @@
                             </li>
                         </ul>
                         <div class="">分页</div>
-                        <!-- <router-view></router-view> -->
-                        <!-- <div class="product_detail"> -->
-                            <el-dialog
-                                class="product_detail"
-                                custom-class="product_dialog"
-                                title="提示"
-                                :visible.sync="dialogVisible"
-                                width="100%" 
-                                :fullscreen="false" 
-                                :modal="false"
-                                :top="0"
-                                >
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <p>这是一段信息</p>
-                                <span slot="footer" class="dialog-footer">
-                                    <el-button @click="dialogVisible = false">取 消</el-button>
-                                    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-                                </span>
-                            </el-dialog>
-                        <!-- </div> -->
+                        <router-view class="product_detail"></router-view>
                     </div>
-                    
-                    <!-- <el-row v-for="list in 3" :key="list" class="product_row">
-                        <el-col :span="6"><div class="grid-content bg-purple-dark"></div></el-col>
-                        <el-col :span="6"><div class="grid-content bg-purple-purple"></div></el-col>
-                        <el-col :span="6"><div class="grid-content bg-purple-purple"></div></el-col>
-                        <el-col :span="6"><div class="grid-content bg-purple-dark"></div></el-col>
-                    </el-row> -->
                 </el-card>
             </div>
         </div>
@@ -117,7 +74,7 @@
                     "justify-content": "space-around",
                     "align-items": "center",
                 },
-                dialogVisible:true,
+                dialogVisible:false,
 
             }
         },
@@ -128,7 +85,8 @@
         },
         methods:{
             clickProduct:function(){
-                this.dialogVisible = true;
+                // this.dialogVisible = true;
+                this.$router.push({path:'productDetail'})
             }
         }
     }
@@ -193,15 +151,12 @@
     height:108px;
     border:1px solid #ccc;
 }
-/* 改写productDetail样式 */
-.product_body .el-dialog__wrapper{
-    position: absolute;
-    background-color:#fff
-}
-.product_body .el-dialog__wrapper .product_dialog{
-    background-color:lawngreen !important;
-}
-.product_dialog .el-dialog__header{
-    background-color:lawngreen !important;
+.product_detail{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:antiquewhite;
 }
 </style>

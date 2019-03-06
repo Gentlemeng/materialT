@@ -60,6 +60,7 @@
             "#b4b8ab"
           ],
         },
+        // carouselImg
         carouselImg: [{
           url: './../static/img/carousel/01.jpg',
           info: "从业10余年，专注服务客户"
@@ -246,6 +247,8 @@
     },
     mounted() {
       let _this = this;
+      let carsouleDom = document.querySelector(".carousel_wrap");
+      carsouleDom.style.height = (1190*818/1538)+'px'
       // console.log(this.axios);
       async function drawMap() {
         _this.mapData = await _this.reqMapData();
@@ -534,7 +537,8 @@
     margin:0 auto;
       /*width:1538px;
       height:818px; */
-    height: 70%;
+    /* height: 70%; */
+    height:calc(1190px * 818px) / 1538px;
   }
     .carousel_info{
         width:100%;
@@ -543,7 +547,7 @@
         left:0;
         font-size:30px;
         text-align: center;
-        color:rgba(255,255,255.5);
+        color:rgba(255,255,255,1);
     }
   .carousel_img {
     width: 100%;
