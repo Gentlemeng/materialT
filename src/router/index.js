@@ -21,7 +21,11 @@ export default new Router({
         },
         {
           path: '/products',
-          component: resolve => require(['../components/Products.vue'], resolve)
+          component: resolve => require(['../components/Products.vue'], resolve),
+          children:[{
+              path:'/productDetail',
+              component:resolve=>require(['../components/ProductDetail.vue'],resolve)
+          }]
         },
         {
           path: '/information',
@@ -31,24 +35,20 @@ export default new Router({
           path: '/contact',
           component: resolve => require(['../components/Contact.vue'], resolve)
         },
-        // {
-        //   path: '/treeshow',
-        //   component: resolve => require(['../components/page/treeShow.vue'], resolve)
-        // },
-        // {
-        //   path: '/GFPData',
-        //   component: resolve => require(['../components/page/GFPData.vue'], resolve)
-        // },
-        // {
-        //   path: '/Editor',
-        //   component: resolve => require(['../components/page/Editor.vue'], resolve)
-        // }
       ]
     },
     {
       path: "/index",
       name: "index",
       component: Index,
+    },
+    {
+        path: "/business",
+        redirect: '/home'
+    },
+    {
+        path: "/blank",
+        redirect: '/home'
     }
   ]
 })

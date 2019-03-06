@@ -1,0 +1,321 @@
+[{
+        "code": "000",
+        "name": "全国",
+        "children": null
+    },
+    {
+        "code": "100",
+        "name": "八大区域",
+        "children": [{
+                "code": "101",
+                "name": "华南",
+                "children": null
+            },
+            {
+                "code": "102",
+                "name": "华中",
+                "children": null
+            },
+            {
+                "code": "103",
+                "name": "华北",
+                "children": null
+            },
+            {
+                "code": "104",
+                "name": "西北",
+                "children": null
+            },
+            {
+                "code": "105",
+                "name": "西南",
+                "children": null
+            },
+            {
+                "code": "106",
+                "name": "东北",
+                "children": null
+            },
+            {
+                "code": "107",
+                "name": "华东",
+                "children": null
+            }
+        ]
+    },
+    {
+        "code": "200",
+        "name": "城市群",
+        "children": [{
+                "code": "201",
+                "name": "北部湾城市群",
+                "children": null
+            },
+            {
+                "code": "202",
+                "name": "成渝城市群",
+                "children": null
+            },
+            {
+                "code": "203",
+                "name": "滇中城市群",
+                "children": null
+            },
+            {
+                "code": "204",
+                "name": "关中平原城市群",
+                "children": null
+            },
+            {
+                "code": "205",
+                "name": "哈长城市群",
+                "children": null
+            },
+            {
+                "code": "206",
+                "name": "海峡西岸城市群",
+                "children": null
+            },
+            {
+                "code": "207",
+                "name": "江淮城市群",
+                "children": null
+            },
+            {
+                "code": "208",
+                "name": "京津冀城市群",
+                "children": null
+            },
+            {
+                "code": "209",
+                "name": "辽中南城市群",
+                "children": null
+            },
+            {
+                "code": "210",
+                "name": "宁夏沿黄城市群",
+                "children": null
+            },
+            {
+                "code": "211",
+                "name": "黔中城市群",
+                "children": null
+            },
+            {
+                "code": "212",
+                "name": "山东半岛城市群",
+                "children": null
+            },
+            {
+                "code": "213",
+                "name": "太原城市群",
+                "children": null
+            },
+            {
+                "code": "214",
+                "name": "长江三角洲城市群",
+                "children": null
+            },
+            {
+                "code": "215",
+                "name": "长江中游城市群",
+                "children": null
+            },
+            {
+                "code": "216",
+                "name": "长株潭城市群",
+                "children": null
+            },
+            {
+                "code": "217",
+                "name": "中原城市群",
+                "children": null
+            },
+            {
+                "code": "218",
+                "name": "珠江三角洲城市群",
+                "children": null
+            }
+        ]
+    },
+    {
+        "code": "300",
+        "name": "四大板块",
+        "children": [{
+                "code": "301",
+                "name": "东北",
+                "children": null
+            },
+            {
+                "code": "302",
+                "name": "东部",
+                "children": null
+            },
+            {
+                "code": "303",
+                "name": "西部",
+                "children": null
+            },
+            {
+                "code": "304",
+                "name": "中部",
+                "children": null
+            }
+        ]
+    },
+    {
+        "code": "400",
+        "name": "省自治区",
+        "children": [{
+                "code": "401",
+                "name": "河北",
+                "children": null
+            },
+            {
+                "code": "402",
+                "name": "山西",
+                "children": null
+            },
+            {
+                "code": "403",
+                "name": "辽宁",
+                "children": null
+            },
+            {
+                "code": "404",
+                "name": "吉林",
+                "children": null
+            },
+            {
+                "code": "405",
+                "name": "黑龙江",
+                "children": null
+            },
+            {
+                "code": "406",
+                "name": "江苏",
+                "children": null
+            },
+            {
+                "code": "407",
+                "name": "浙江",
+                "children": null
+            },
+            {
+                "code": "408",
+                "name": "安徽",
+                "children": null
+            },
+            {
+                "code": "409",
+                "name": "福建",
+                "children": null
+            },
+            {
+                "code": "410",
+                "name": "江西",
+                "children": null
+            },
+            {
+                "code": "411",
+                "name": "山东",
+                "children": null
+            },
+            {
+                "code": "412",
+                "name": "河南",
+                "children": null
+            },
+            {
+                "code": "413",
+                "name": "湖北",
+                "children": null
+            },
+            {
+                "code": "414",
+                "name": "湖南",
+                "children": null
+            },
+            {
+                "code": "415",
+                "name": "广东",
+                "children": null
+            },
+            {
+                "code": "416",
+                "name": "海南",
+                "children": null
+            },
+            {
+                "code": "417",
+                "name": "四川",
+                "children": null
+            },
+            {
+                "code": "418",
+                "name": "贵州",
+                "children": null
+            },
+            {
+                "code": "419",
+                "name": "云南",
+                "children": null
+            },
+            {
+                "code": "420",
+                "name": "陕西",
+                "children": null
+            },
+            {
+                "code": "421",
+                "name": "甘肃",
+                "children": null
+            },
+            {
+                "code": "422",
+                "name": "青海",
+                "children": null
+            },
+            {
+                "code": "423",
+                "name": "台湾",
+                "children": null
+            },
+            {
+                "code": "424",
+                "name": "内蒙古",
+                "children": null
+            },
+            {
+                "code": "425",
+                "name": "广西",
+                "children": null
+            },
+            {
+                "code": "426",
+                "name": "西藏",
+                "children": null
+            },
+            {
+                "code": "427",
+                "name": "宁夏",
+                "children": null
+            },
+            {
+                "code": "428",
+                "name": "新疆",
+                "children": null
+            }
+        ]
+    },
+    {
+        "code": "500",
+        "name": "副省级城市",
+        "children": null
+    },
+    {
+        "code": "600",
+        "name": "省会城市",
+        "children": null
+    }
+]

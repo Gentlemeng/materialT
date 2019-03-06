@@ -1,168 +1,619 @@
 <template>
   <div class="home">
     <full-page :options="options" id="fullpage">
-      <div class="section">
+      <section class="section">
         <!-- 首页走马灯 -->
         <div class="carousel_wrap">
           <el-carousel :autoplay="false">
-            <el-carousel-item v-for="item in 4" :key="item">
-              <h3>{{ item }}</h3>
+            <el-carousel-item v-for="(item,index) in carouselImg" :key="index">
+              <div class="carousel">
+                <p class="carousel_info">{{item.info}}</p>
+                <div class="carousel_img" :style='{backgroundImage:"url("+item.url+")"}'></div>
+              </div>
             </el-carousel-item>
           </el-carousel>
         </div>
-      </div>
-      <div class="section">
+      </section>
+      <section class="section">
         <div class="slide">
-          <h3>Slide 2</h3>
+          <div class="map_wrap">
+            <aside class="map_info"></aside>
+            <section class="map_main">
+              <div id="map"></div>
+            </section>
+          </div>
+          <!-- <h3>Slide 2</h3> -->
+
         </div>
-      </div>
-      <div class="section">
+      </section>
+      <section class="section">
         <h3>Section 3</h3>
-      </div>
+      </section>
     </full-page>
   </div>
 </template>
 
 <script>
-import Header from "./common/Header.vue"
-export default {
-    components:{Header},
-  data() {
-    return {
-      options: {
-        licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        afterLoad: this.afterLoad,
-        scrollBar: false,
-        menu: "#menu",
-        navigation: true,
-        anchors: ["home", "business", "blank"],
-        sectionsColor: [
-          "#fff",
-          "#ccc",
-          "#ddd",
-          "#fec401",
-          "#1bcee6",
-          "#ee1a59",
-          "#2c3e4f",
-          "#ba5be9",
-          "#b4b8ab"
-        ]
+  import Header from "./common/Header.vue"
+  export default {
+    components: {
+      Header
+    },
+    data() {
+      return {
+        options: {
+          licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+          afterLoad: this.afterLoad,
+          scrollBar: false,
+          menu: "#menu",
+          navigation: true,
+          anchors: ["home", "business", "blank"],
+          sectionsColor: [
+            "#fff",
+            "#fff",
+            "#d7d7d7",
+            "#fec401",
+            "#1bcee6",
+            "#ee1a59",
+            "#2c3e4f",
+            "#ba5be9",
+            "#b4b8ab"
+          ],
+        },
+        carouselImg: [{
+          url: './../static/img/carousel/01.jpg',
+          info: "从业10余年，专注服务客户"
+        }, {
+          url: './../static/img/carousel/02.jpg',
+          info: "从业10余年，专注服务客户"
+        }],
+        mapData: null,
+        geoCoordMap: { //可以在地图上显示的城市的坐标信息
+          '成都': [103.9526, 30.7617],
+          '乌鲁木齐': [87.9236, 43.5883],
+          '武汉': [114.3896, 30.6628],
+          '太原': [112.5570, 37.8768],
+          '西安': [108.9463, 34.3475],
+          '银川': [106.2389, 38.4923],
+          '邯郸': [114.4913, 36.6254],
+
+
+          // '铜陵': [117.81154, 30.945515],
+          // '长春': [125.8154, 44.2584],
+          // '长沙': [113.0823, 28.2568],
+          // '贵阳': [106.6992, 26.7682],
+          // '杨凌': [109.1162, 34.2004],
+          // '深圳': [114.5435, 22.5439],
+          // '济南': [117.1582, 36.8701],
+          // '海口': [110.3893, 19.8516],
+          // '沈阳': [123.1238, 42.1216],
+          // '红安': [114.23, 31.1],
+          // '昆明': [102.9199, 25.4663],
+          // '杭州': [119.5313, 29.8773],
+          // '拉萨': [91.1865, 30.1465],
+          // '天津': [117.4219, 39.4189],
+          // '呼和浩特': [111.4124, 40.4901],
+          // '哈尔滨': [127.9688, 45.368],
+          // '北京': [116.4551, 40.2539],
+          // '南京': [118.8062, 31.9208],
+          // '南宁': [108.479, 23.1152],
+          // '南昌': [116.0046, 28.6633],
+          // '上海': [121.4648, 31.2891],
+          // '三亚': [109.5000, 18.2000]
+        },
+        HFData: [ // 数据中name的城市名称必须与geoCoordMap中城市名称一致, 不然关联不上，邯郸到各地区的线路
+          [{
+            name: '邯郸'
+          }, {
+            name: '成都',
+            value: 66
+          }],
+          [{
+            name: '邯郸'
+          }, {
+            name: '乌鲁木齐',
+            value: 66
+          }],
+          [{
+            name: '邯郸'
+          }, {
+            name: '太原',
+            value: 66
+          }],
+          [{
+            name: '邯郸'
+          }, {
+            name: '西安',
+            value: 66
+          }],
+          [{
+            name: '邯郸'
+          }, {
+            name: '银川',
+            value: 66
+          }],
+          [{
+            name: '邯郸'
+          }, {
+            name: '武汉',
+            value: 66
+          }],
+          [{
+            name: '成都'
+          }, {
+            name: '邯郸',
+            value: 66
+          }],
+          [{
+            name: '乌鲁木齐'
+          }, {
+            name: '邯郸',
+            value: 66
+          }],
+          [{
+            name: '太原'
+          }, {
+            name: '邯郸',
+            value: 66
+          }],
+          [{
+            name: '西安'
+          }, {
+            name: '邯郸',
+            value: 66
+          }],
+          [{
+            name: '银川'
+          }, {
+            name: '邯郸',
+            value: 66
+          }],
+          [{
+            name: '武汉'
+          }, {
+            name: '邯郸',
+            value: 66
+          }],
+          // [{name: '邯郸'}, {name: '邯郸',value: 66}],
+
+          // [{name: '邯郸'}, {name: '长春',value: 66}],
+          // [{name: '邯郸'}, {name: '长沙',value: 66}],
+          // [{name: '邯郸'}, {name: '贵阳',value: 66}],
+          // [{name: '邯郸'}, {name: '杨凌',value: 66}],
+          // [{name: '邯郸'}, {name: '深圳',value: 66}],
+          // [{name: '邯郸'}, {name: '济南',value: 66}],
+          // [{name: '邯郸'}, { name: '海口',value: 66}],
+          // [{name: '邯郸'}, {name: '沈阳',value: 66}],
+          // [{name: '邯郸'}, {name: '昆明',value: 66}],
+          // [{name: '邯郸'}, {name: '杭州',value: 66}],
+          // [{name: '邯郸'}, {name: '拉萨',value: 66}],
+          // [{name: '邯郸'}, {name: '天津',value: 66}],
+          // [{name: '邯郸'}, {name: '呼和浩特',value: 66}],
+          // [{name: '邯郸'}, {name: '哈尔滨',value: 66}],
+          // [{name: '邯郸'}, {name: '北京',value: 66}],
+          // [{name: '邯郸'}, {name: '南宁',value: 66}],
+          // [{name: '邯郸'}, {name: '南昌',value: 66}],
+          // [{name: '邯郸'}, {name: '上海',value: 66}]
+        ],
+        planePath: 'arrow',
+        colorArr: ['#fff', '#FFFFA8', '#46bee9'],
+        series: [],
+        mapBoxOption: {
+          tooltip: {
+            trigger: 'item',
+            formatter: function (result) { //回调函数，参数params具体格式参加官方API
+              return result.name
+            }
+          },
+          title: {
+            text: '货运网络',
+            //subtext:'',
+            left: 'center',
+            top: '8%',
+            textAlign: 'auto',
+            textStyle: {
+              color: '#c6251e',
+              fontSize: 30,
+            }
+          },
+          grid: {
+            // width:'50%',
+            // height:'70%'
+          },
+          geo: {
+            map: 'china',
+            roam: false, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+            // aspectScale: 0.75,
+            // zoom: 1.20,
+            left: 'center',
+            top: "15%",
+            itemStyle: {
+              normal: {
+                areaColor: '#0083ce',
+                borderColor: 'rgba(0,0,0,.4)'
+              },
+              // emphasis: {
+              //     borderWidth: 0,
+              //     borderColor: '#0066ba',
+              //     areaColor: "#0494e1",
+              //     shadowColor: 'rgba(0, 0, 0, 0.5)'
+              // }
+            }
+          },
+          series: null
+        },
+      };
+    },
+    mounted() {
+      let _this = this;
+      // console.log(this.axios);
+      async function drawMap() {
+        _this.mapData = await _this.reqMapData();
+        //   _this.mapSetOption()
+        _this.linkCity()
+      }
+      drawMap();
+
+      // console.log(this.echarts);
+    },
+    methods: {
+      //请求地图数据
+      reqMapData() {
+        return new Promise((resolve, reject) => {
+          this.axios('./../static/json/china.json')
+            .then((res) => {
+              // console.log(res);
+              if (res.status === 200) {
+                resolve(res.data);
+              }
+            }).catch((err) => {
+              rejectr(err);
+            })
+        })
       },
-    };
-  },
-  methods: {
-    afterLoad() {
-      console.log("After load");
-    },
-    addSection(e) {
-      e.preventDefault();
-      var newSectionNumber =
-        document.querySelectorAll(".fp-section").length + 1;
+      convertData(data) {
+        let res = [];
+        for (let i = 0; i < data.length; i++) {
+          let dataItem = data[i];
+          let fromCoord = this.geoCoordMap[dataItem[0].name];
+          let toCoord = this.geoCoordMap[dataItem[1].name];
+          if (fromCoord && toCoord) {
+            res.push([{
+              coord: fromCoord
+            }, {
+              coord: toCoord
+            }]);
+          }
+        }
+        return res;
+      },
+      //遍历由邯郸到其他城市的线路
+      linkCity() {
+        let _this = this;
+        [
+          ['邯郸', this.HFData]
+        ].forEach(function (item, i) {
+          // 配置
+          _this.series.push({
+            // 系列名称，用于tooltip的显示
+            name: item[0],
+            type: 'lines',
+            zlevel: 1, // 用于 Canvas 分层，不同zlevel值的图形会放置在不同的 Canvas 中
+            // effect出发到目的地 的白色尾巴线条
+            // 线特效的配置
+            effect: {
+              show: true,
+              period: 6, // 特效动画的时间，单位为 s
+              trailLength: 0.1, // 特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长
+              color: '#46bee9', // 移动箭头颜色
+              symbol: _this.planePath,
+              symbolSize: 6 // 特效标记的大小
+            },
+            // lineStyle出发到目的地 的线条颜色
+            lineStyle: {
+              normal: {
+                color: _this.colorArr[i],
+                width: 0,
+                curveness: 0.2 //幅度
+              }
+            },
+            data: _this.convertData(item[1]) //开始到结束数据
+          }, {
+            //出发地信息
+            name: item[0],
+            type: 'lines',
+            zlevel: 2,
+            effect: {
+              show: true,
+              period: 6,
+              trailLength: 0,
+              symbol: _this.planePath,
+              symbolSize: 6
+            },
+            lineStyle: {
+              normal: {
+                color: _this.echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: '#FFFFA8' // 出发
+                }, {
+                  offset: 1,
+                  color: '#58B3CC ' // 结束 颜色
+                }], false),
+                width: 1.5,
+                opacity: 0.4,
+                curveness: 0.2
+              }
+            },
+            data: _this.convertData(item[1])
+          }, {
+            // 目的地信息
+            name: item[0],
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            zlevel: 2,
+            rippleEffect: {
+              brushType: 'stroke'
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'right',
+                formatter: '{b}'
+              }
+            },
+            symbolSize: function (val) {
+              return val[2] / 8;
+            },
+            itemStyle: {
+              normal: {
+                color: _this.colorArr[i]
+              }
+            },
+            data: item[1].map(function (dataItem) {
+              return {
+                name: dataItem[1].name,
+                value: _this.geoCoordMap[dataItem[1].name].concat([dataItem[1].value])
+              };
+            })
+          });
+        })
+        _this.mapBoxOption.series = _this.series;
+        //   mapBoxEchart.setOption(mapBoxOption);
+        _this.mapSetOption()
 
-      // creating the section div
-      var section = document.createElement("div");
-      section.className = "section";
-      section.innerHTML = `<h3>Section ${newSectionNumber}</h3>`;
+      },
+      mapSetOption() {
+        let mapDom = document.querySelector("#map")
+        let mapChart = this.echarts.init(mapDom)
+        this.echarts.registerMap('china', this.mapData);
+        //   let option = {
+        //     baseOption: {
+        //         tooltip: {
+        //             trigger: 'item',
+        //             formatter: function (result) { //回调函数，参数params具体格式参加官方API
+        //                 return result.name
+        //             }
+        //         },
+        //         title:{
+        //             text: '货运专线',
+        //             //subtext:'',
+        //             left: 'center',
+        //             top: '8%',
+        //             textAlign: 'auto',
+        //             textStyle: {
+        //                 color: '#c6251e',
+        //                 fontSize:26,
+        //             }
+        //         },
+        //         series: {
+        //             id: 'map',
+        //             type: 'map',
+        //             map: "china", //要和echarts.registerMap（）中第一个参数一致
+        //             left: 'center',
+        //             top:"15%",
+        //             width: 'auto',
+        //             height: 'auto',
+        //             selectedMode: 'single',
+        //             itemStyle: {
+        //                 normal: {
+        //                     borderWidth: 1,
+        //                     borderColor: 'rgba(0,0,0,.3)',
+        //                     areaColor: '#ddd',
+        //                     label: {
+        //                         show: false
+        //                     }
+        //                 },
+        //             },
+        //             //图形上的文本标签，可用于说明图形的一些数据信息
+        //             label: {
+        //                 normal: {
+        //                     show: true,
+        //                     /*是否城市名字*/
+        //                     textStyle: {
+        //                         color: 'rgba(0,0,0,0.8)'
+        //                     }
+        //                 },
+        //                 emphasis: {
+        //                     show: false
+        //                 }
+        //             },
+        //             markLine: {
+        //                 silent: true
+        //             },
+        //         }
+        //     }
+        //   }
+        mapChart.setOption(this.mapBoxOption, true);
 
-      // adding section
-      document.querySelector("#fullpage").appendChild(section);
+      },
+      afterLoad() {
+        //   console.log("After load");
+      },
+      addSection(e) {
+        e.preventDefault();
+        var newSectionNumber =
+          document.querySelectorAll(".fp-section").length + 1;
 
-      // creating the section menu element
-      var sectionMenuItem = document.createElement("li");
-      sectionMenuItem.setAttribute(
-        "data-menuanchor",
-        "page" + newSectionNumber
-      );
-      sectionMenuItem.innerHTML = `<a href="#page${newSectionNumber}">Section${newSectionNumber}</a>`;
+        // creating the section div
+        var section = document.createElement("div");
+        section.className = "section";
+        section.innerHTML = `<h3>Section ${newSectionNumber}</h3>`;
 
-      // adding it to the sections menu
-      var sectionsMenuItems = document.querySelector("#menu");
-      sectionsMenuItems.appendChild(sectionMenuItem);
+        // adding section
+        document.querySelector("#fullpage").appendChild(section);
 
-      // adding anchor for the section
-      this.options.anchors.push(`page${newSectionNumber}`);
+        // creating the section menu element
+        var sectionMenuItem = document.createElement("li");
+        sectionMenuItem.setAttribute(
+          "data-menuanchor",
+          "page" + newSectionNumber
+        );
+        sectionMenuItem.innerHTML = `<a href="#page${newSectionNumber}">Section${newSectionNumber}</a>`;
 
-      // we have to call `update` manually as DOM changes won't fire updates
-      // requires the use of the attribute ref="fullpage" on the
-      // component element, in this case, <full-page>
-      // ideally, use an ID element for that element too
-      this.$refs.fullpage.build();
-    },
-    removeSection() {
-      var sections = document
-        .querySelector("#fullpage")
-        .querySelectorAll(".fp-section");
-      var lastSection = sections[sections.length - 1];
+        // adding it to the sections menu
+        var sectionsMenuItems = document.querySelector("#menu");
+        sectionsMenuItems.appendChild(sectionMenuItem);
 
-      // removing the last section
-      lastSection.parentNode.removeChild(lastSection);
+        // adding anchor for the section
+        this.options.anchors.push(`page${newSectionNumber}`);
 
-      // removing the last anchor
-      this.options.anchors.pop();
+        // we have to call `update` manually as DOM changes won't fire updates
+        // requires the use of the attribute ref="fullpage" on the
+        // component element, in this case, <full-page>
+        // ideally, use an ID element for that element too
+        this.$refs.fullpage.build();
+      },
+      removeSection() {
+        var sections = document
+          .querySelector("#fullpage")
+          .querySelectorAll(".fp-section");
+        var lastSection = sections[sections.length - 1];
 
-      // removing the last item on the sections menu
-      var sectionsMenuItems = document.querySelectorAll("#menu li");
-      var lastItem = sectionsMenuItems[sectionsMenuItems.length - 1];
-      lastItem.parentNode.removeChild(lastItem);
-    },
-    toggleNavigation() {
-      this.options.navigation = !this.options.navigation;
-    },
-    toggleScrollbar() {
-      console.log("Changing scrollbar...");
-      this.options.scrollBar = !this.options.scrollBar;
-    },
-    // 自定义逻辑方法
-    
-  }
-};
+        // removing the last section
+        lastSection.parentNode.removeChild(lastSection);
+
+        // removing the last anchor
+        this.options.anchors.pop();
+
+        // removing the last item on the sections menu
+        var sectionsMenuItems = document.querySelectorAll("#menu li");
+        var lastItem = sectionsMenuItems[sectionsMenuItems.length - 1];
+        lastItem.parentNode.removeChild(lastItem);
+      },
+      toggleNavigation() {
+        this.options.navigation = !this.options.navigation;
+      },
+      toggleScrollbar() {
+        console.log("Changing scrollbar...");
+        this.options.scrollBar = !this.options.scrollBar;
+      },
+      // 自定义逻辑方法
+
+    }
+  };
 </script>
 
 <style>
-.content{
-    padding-top:0 !important;
-}
-.home{
+  .content {
+    padding-top: 0 !important;
+  }
+
+  .section {
     padding-top: 150px;
+  }
 
-}
-.carousel_wrap {
-  height: 70%;
-}
-.el-carousel {
-  height: 100%;
-}
-.el-carousel__container {
-  height: 100%;
-}
-.el-carousel__item {
-  height: 100%;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-}
+  .carousel {
+      position:relative;
+      width:1190px;
+      margin:0 auto;
+    height: 100%;
+  }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
+  .carousel_wrap {
+      width:1190px;
+    margin:0 auto;
+      /*width:1538px;
+      height:818px; */
+    height: 70%;
+  }
+    .carousel_info{
+        width:100%;
+        position:absolute;
+        top:1em;
+        left:0;
+        font-size:30px;
+        text-align: center;
+        color:rgba(255,255,255.5);
+    }
+  .carousel_img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
-/* 主要产品 */
-.container {
-  width: 60%;
-  height: 42%;
-  margin: 0 auto;
-}
-.container-aside {
-  background: #ccc;
-}
-.container-main {
-  background: #ddd;
-}
+  .el-carousel {
+    height: 100%;
+  }
+
+  .el-carousel__container {
+    height: 100%;
+  }
+
+  .el-carousel__item {
+    height: 100%;
+  }
+
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 150px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n + 1) {
+    /* background-color: #d3dce6; */
+  }
+
+  /* 主要产品 */
+  .container {
+    width: 60%;
+    height: 42%;
+    margin: 0 auto;
+  }
+
+  .container-aside {
+    background: #ccc;
+  }
+
+  .container-main {
+    background: #ddd;
+  }
+
+  /* section2 */
+  .map_wrap {
+    display: flex;
+    width: 1190px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #ddd;
+  }
+
+  .map_info {
+    flex: 1.5;
+    background-color: bisque;
+  }
+
+  .map_main {
+    flex: 4;
+  }
+
+  #map {
+    height: 100%;
+  }
 </style>

@@ -14,7 +14,7 @@ import Header from "./common/Header.vue"
             Header,
         },
         created(){
-            this.$router.push("/home");
+            // this.$router.push("/home");
         }
     }
 </script>

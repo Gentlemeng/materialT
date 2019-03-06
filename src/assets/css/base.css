@@ -1,13 +1,13 @@
 .clear:after {
-  display: block;
-  clear: both;
-  content: "";
-  visibility: hidden;
-  height: 0
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0
 }
 
 .clear {
-  zoom: 1
+    zoom: 1
 }
 
 .left {
