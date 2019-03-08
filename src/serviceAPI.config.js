@@ -9,5 +9,7 @@ const URL = {
     //资讯中心
 
     //联系方式页
+    contact:BASEURL+'contact',
+
 }
 module.exports = URL

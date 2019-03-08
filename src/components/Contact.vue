@@ -47,6 +47,8 @@
 </template>
 
 <script>
+    import url from './../serviceAPI.config.js'
+
     export default {
         data() {
             return {
@@ -95,7 +97,20 @@
                 }
             }
         },
+        created(){
+            this.reqContactData();
+        },
         methods:{
+            reqContactData:function(){
+                this.axios.get(url.contact)
+                    .then((res)=>{
+                        // console.log(res)
+                        if(res.data.code==200){
+                            console.log(res);
+                            // this.companyIntroData = res.data.data[0]
+                        }
+                    })
+            },
             onSubmit:function(){
                 alert("success")
             },
