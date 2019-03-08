@@ -3,13 +3,13 @@
         <section class="introduce">
             <h3 class="company_location">公司地址</h3>
             
-            <p class="introduce_txt">邯郸市壮达物资有限公司位于历史文化名城赵国古都邯郸。历史文化底蕴丰厚，有“成语之都”之美誉。衔晋冀鲁豫四省交际中心，交通发达，为公司发展奠定了坚实的空间基础。</p>
+            <p class="introduce_txt" v-for="(text,index) in companyIntroData.address" :key="'address'+index">{{text}}</p>
             <div id="allmap"></div>
             <h3 class="company_sellRange">经营范围</h3>
-            <p class="introduce_txt">我公司经营：8-30kg轻轨，38-60kg重轨，38-120kg起重轨，各种型号工字钢，矿用工字钢，U型钢，六棱钢，槽钢，扁钢，角钢，道钉，道夹板，鱼尾螺栓，锚杆，螺杆，锚网，穿墙丝，山型件，建筑配件，定做各种异形件以及建筑类木方，木胶板等。</p>
+            <p class="introduce_txt" v-for="(text,index) in companyIntroData.sellRange" :key="'sellRange'+index">{{text}}</p>
+
             <h3 class="company_promise">业务承诺</h3>
-            <p class="introduce_txt">公司自成立以来，始终坚持“优惠一切归客户”的原则，以最低的价格提供的产品，始终秉承“诚信合作，互利共赢”的理念，以的团队追求更好的服务。并且成立了公司专用的物流车队，到货及时，极大方便了客户。</p>
-            <p class="introduce_txt">壮达深信：每一个产品就是一条广告，以一流的产品、完善的售后服务来赢得用户的信任，壮达竭诚希望与新老客户合作与沟通，与客户同谋发展，共享新经济的繁荣。</p>
+            <p class="introduce_txt" v-for="(text,index) in companyIntroData.promise" :key="'promise'+index">{{text}}</p>             
         </section>
     </div>
 </template>
@@ -20,7 +20,7 @@
     export default {
         data() {
             return {
-                // key: value
+                companyIntroData:{address:[],sellRange:[],promise:[]},
             }
         },
         mounted() {
@@ -38,7 +38,10 @@
             reqIntroData:function(){
                 this.axios.get(url.companyIntro)
                     .then((res)=>{
-                        console.log(res)
+                        // console.log(res)
+                        if(res.data.code==200){
+                            this.companyIntroData = res.data.data[0]
+                        }
                     })
             },
             drawMap:function(){
