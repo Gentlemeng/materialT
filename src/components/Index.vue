@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <Header></Header>
-        <div class="content">
+        <div>
             <transition name="move" mode="out-in"><router-view></router-view></transition>
         </div>
     </div>
@@ -19,7 +19,4 @@ import Header from "./common/Header.vue"
     }
 </script>
 <style scoped>
-    .content{
-        padding-top:150px;
-    }
 </style>

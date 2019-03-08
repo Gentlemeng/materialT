@@ -4,17 +4,17 @@
             <aside class="product_aside">
                 <el-card class="product_category_wrap">
                     <div slot="header">
-                        <span class="product_category_title">产品分类</span>
+                        <span class="card_title">产品分类</span>
                     </div>
                     <div class="product_category">
-                        暂无分类
+                        <el-tree :data="productTree" :props="defaultProps" @node-click="clickProTree"></el-tree>
                     </div>
                 </el-card>
             </aside>
             <div class="product_con">
                 <el-card class="product_list_wrap" :body-style="productConStyle">
                     <div slot="header" class="product_header">
-                        <span class="product_list_title">产品列表</span>
+                        <span class="card_title">产品列表</span>
                     </div>
                     <div class="product_body">
                         <ul class="product_ul clear">
@@ -26,7 +26,11 @@
                                 </el-card>
                             </li>
                         </ul>
-                        <div class="">分页</div>
+                        <pagination :total="pagination.total"
+                            :page-size="pagination.pageSize" 
+                            :current-page="pagination.currentPage"
+                            :req-list-fn="reqProductList" v-on:currentPage="viewCurrentPage">
+                        </pagination>
                         <router-view class="product_detail"></router-view>
                     </div>
                 </el-card>
@@ -36,9 +40,30 @@
 </template>
 
 <script>
+  import pagination from "./common/Pagination.vue"
+
     export default {
+        components: {
+            pagination
+        },
         data() {
             return {
+                productTree: [
+                    {
+                        label: '一级 1',
+                        children: [{
+                            label: '二级 1-1',
+                            children: [{
+                                label: '三级 1-1-1',
+                                id:"123"
+                            }]
+                        }]
+                    }
+                ],
+                defaultProps: {
+                    children: 'children',
+                    label: 'label'
+                },
                 productData:[
                     {
                         pro_img:'./../static/img/product/01.jpg',
@@ -74,16 +99,35 @@
                     "justify-content": "space-around",
                     "align-items": "center",
                 },
+                productPage:1,
+                pagination:{
+                    total:15,
+                    pageSize:1,
+                    currentPage:1,
+                },
                 dialogVisible:false,
 
             }
         },
         mounted(){
-            let dialogDom = document.querySelector(".product_dialog")
-            dialogDom.style.margin = "0px"
+            // let dialogDom = document.querySelector(".product_dialog")
+            // dialogDom.style.margin = "0px"
             // dialogDom.style.height = "100%"
         },
         methods:{
+            clickProTree:function(obj,node,ele){
+                if(node.isLeaf){
+                    console.log(obj)
+                    console.log(node)
+                    console.log(ele)
+                }
+            },
+            reqProductList:function(){
+
+            },
+            viewCurrentPage(page){
+                this.productPage = page;
+            },
             clickProduct:function(){
                 // this.dialogVisible = true;
                 this.$router.push({path:'productDetail'})
@@ -93,6 +137,9 @@
 </script>
 
 <style scoped>
+.content {
+    padding-top: 0 !important;
+  }
 .product_wrap{
     padding-top:150px;
 }
@@ -105,9 +152,6 @@
 .product_aside{
     flex:1.5;
     /* background-color:ivory; */
-}
-.product_category_title,.product_list_title{
-    font-size:18px;
 }
 .product_category{
     font-size:14px;
@@ -157,6 +201,6 @@
     left:0;
     width:100%;
     height:100%;
-    background-color:antiquewhite;
+    /* background-color:antiquewhite; */
 }
 </style>

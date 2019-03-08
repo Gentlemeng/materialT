@@ -10,11 +10,11 @@
             <div class="company-tel-ways">
               <div class="telephone">
                 <i class="icon-phone"></i>
-                <a href="tel:18330820519">0310-1234567</a>
+                <a href="tel:18330820519">0310-3120336</a>
               </div>
               <div class="mobliephone">
                 <i class="icon-mobile"></i>
-                <a href="tel:18330820519">18330820519</a>
+                <a href="tel:18330820519">13831000156 </a>
               </div>
             </div>
           </div>

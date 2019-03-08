@@ -3,7 +3,7 @@
         <div class="contact">
             <el-card class="box-card">
                 <div slot="header">
-                    <span class="contact_title">联系方式</span>
+                    <span class="card_title">联系方式</span>
                 </div>
                 <div class="card-body">
                     <template>
@@ -16,7 +16,7 @@
             </el-card>
             <el-card class="box-card">
                 <div slot="header">
-                    <span class="contact_title">联系我们</span>
+                    <span class="card_title">联系我们</span>
                 </div>
                 <div class="card-body">
                     <el-form ref="contactForm" :model="contactForm" :rules="rules" label-width="80px" width="360px">
@@ -113,7 +113,7 @@
 }
 .contact{
     width:1190px;
-    margin:50px auto;
+    margin:auto;
 }
 .box-card{
     font-size:18px;

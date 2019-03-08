@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 // import 'lib-flexible/flexible'
 import ElementUI from 'element-ui';
 import VueFullPage from 'vue-fullpage.js'
+// import scroll from 'vue-seamless-scroll'
 import axios from 'axios'
 import Vueaxios from 'vue-axios'
 import Echarts from 'echarts'
@@ -21,6 +22,7 @@ Vue.use(ElementUI)
 Vue.use(VueFullPage)
 Vue.use(Echarts)
 Vue.use(Vueaxios,axios)
+// Vue.use(scroll)
 /* eslint-disable no-new */
 
 document.getElementsByTagName("title")[0].innerHTML = "壮达物资",

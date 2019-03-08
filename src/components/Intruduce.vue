@@ -8,7 +8,7 @@
             <h3 class="company_sellRange">经营范围</h3>
             <p class="introduce_txt">我公司经营：8-30kg轻轨，38-60kg重轨，38-120kg起重轨，各种型号工字钢，矿用工字钢，U型钢，六棱钢，槽钢，扁钢，角钢，道钉，道夹板，鱼尾螺栓，锚杆，螺杆，锚网，穿墙丝，山型件，建筑配件，定做各种异形件以及建筑类木方，木胶板等。</p>
             <h3 class="company_promise">业务承诺</h3>
-            <p class="introduce_txt">公司自成立以来，始终坚持“优惠一切归客户”的原则，以最低的价格提供的产品，始终秉承“诚信合作，互利共赢”的理念，以的团队追求更好的服务。并且成立了公司专用的物流车队，到货及时，极大方便了客户。
+            <p class="introduce_txt">公司自成立以来，始终坚持“优惠一切归客户”的原则，以最低的价格提供的产品，始终秉承“诚信合作，互利共赢”的理念，以的团队追求更好的服务。并且成立了公司专用的物流车队，到货及时，极大方便了客户。</p>
             <p class="introduce_txt">壮达深信：每一个产品就是一条广告，以一流的产品、完善的售后服务来赢得用户的信任，壮达竭诚希望与新老客户合作与沟通，与客户同谋发展，共享新经济的繁荣。</p>
         </section>
     </div>
@@ -16,6 +16,7 @@
 
 <script>
     import BMap from 'BMap';
+    import url from './../serviceAPI.config.js'
     export default {
         data() {
             return {
@@ -26,6 +27,7 @@
             this.drawMap();
         },
         created(){
+            this.reqIntroData();
             // let _this = this;
             // setTimeout(()=>{
             //     _this.drawMap();
@@ -33,6 +35,12 @@
             // },100)
         },
         methods:{
+            reqIntroData:function(){
+                this.axios.get(url.companyIntro)
+                    .then((res)=>{
+                        console.log(res)
+                    })
+            },
             drawMap:function(){
                 // 百度地图API功能
                 var map = new BMap.Map("allmap");
@@ -51,9 +59,9 @@
                 }
                 var infoWindow = new BMap.InfoWindow("地址：河北省邯郸市丛台区丛台西路25号鹿诚商务大厦C单元13层C1303", opts);  // 创建信息窗口对象 
                 marker.addEventListener("click", function(){          
-                map.openInfoWindow(infoWindow,point); //开启信息窗口
+                    map.openInfoWindow(infoWindow,point); //开启信息窗口
                 
-            });
+                });
             }
         }
         
@@ -66,10 +74,10 @@
 }
 .introduce{
     width:1190px;
-    margin:50px auto;
+    margin: auto;
 }
 .introduce h3{
-    margin: 40px 0;
+    margin: 0 0 40px;
     font-size: 40px;
     line-height: 54px;
     font-weight: 800;

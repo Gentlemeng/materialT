@@ -15,29 +15,69 @@
         </div>
       </section>
       <section class="section">
-        <div class="slide">
+        <!-- <div class="slide"> -->
           <div class="map_wrap">
-            <aside class="map_info"></aside>
+            <aside class="order_info_wrap">
+                <div class="order_info">
+                    <el-card class="order_wrap">
+                        <div slot="header">
+                            <span class="card_title">客户订单发货</span>
+                        </div>
+                        <div class="order_table">
+                            <!-- <div  -->
+                            <vue-seamless-scroll
+                            :data="listData" :class-option="classOption" class="seamless_wrap">
+                                <ul class="item">
+                                    <li v-for="(item,index) in listData" :key="index" class="col_2_hide">
+                                        <span>一批</span><span v-text="item.product"></span>
+                                        <span>已发往</span><span v-text="item.target"></span>
+                                        <span>客户：</span><span v-text="item.buyer"></span>
+                                        <span>联系电话:</span><span v-text="item.phone"></span>
+                                    </li>
+                                </ul>
+                            <!-- </div> -->
+                            </vue-seamless-scroll>
+                        </div>
+                    </el-card>
+                </div>
+                <div class="contact_wrap">
+                    <el-card class="contact_card">
+                        <div slot="header">
+                            <span class="card_title">联系方式</span>
+                        </div>
+                        <div class="contact_table">
+                            <template>
+                                <el-table :data="contactData" @show-header="false" style="width:100%" :show-header="false">
+                                    <el-table-column prop="type" label="类型"></el-table-column>
+                                    <el-table-column prop="value" label="内容"></el-table-column>
+                                </el-table>
+                            </template>
+                        </div>
+                    </el-card>
+                </div>
+                
+            </aside>
             <section class="map_main">
               <div id="map"></div>
             </section>
-          </div>
-          <!-- <h3>Slide 2</h3> -->
+          <!-- </div> -->
 
         </div>
       </section>
-      <section class="section">
+      <!-- <section class="section">
         <h3>Section 3</h3>
-      </section>
+      </section> -->
     </full-page>
   </div>
 </template>
 
 <script>
   import Header from "./common/Header.vue"
+  import vueSeamlessScroll from 'vue-seamless-scroll'
   export default {
     components: {
-      Header
+      Header,
+      vueSeamlessScroll
     },
     data() {
       return {
@@ -68,6 +108,49 @@
           url: './../static/img/carousel/02.jpg',
           info: "从业10余年，专注服务客户"
         }],
+        contactData:[
+            {
+                type: '电话',
+                value: '0310-3120336'
+            }, {
+                type: '联系人',
+                value: '安经理'
+            },{
+                type: '手机号码',
+                value: '13831000156'
+            }
+        ],
+        listData: [{
+            product:'建筑配件、螺杆、穿墙丝',
+            target:'广府古城',
+            buyer:'李经理',
+            phone:'183*****519',
+        },{
+            product:'建筑配件、螺杆、穿墙丝',
+            target:'广府古城',
+            buyer:'李经理',
+            phone:'183*****519',
+        },{
+            product:'建筑配件、螺杆、穿墙丝',
+            target:'广府古城',
+            buyer:'李经理',
+            phone:'183*****519',
+        },{
+            product:'建筑配件、螺杆、穿墙丝',
+            target:'广府古城',
+            buyer:'李经理',
+            phone:'183*****519',
+        },{
+            product:'建筑配件、螺杆、穿墙丝',
+            target:'广府古城',
+            buyer:'李经理',
+            phone:'183*****519',
+        },{
+            product:'建筑配件、螺杆、穿墙丝',
+            target:'广府古城',
+            buyer:'李经理',
+            phone:'183*****519',
+        },],
         mapData: null,
         geoCoordMap: { //可以在地图上显示的城市的坐标信息
           '成都': [103.9526, 30.7617],
@@ -245,11 +328,18 @@
         },
       };
     },
+    computed: {
+        classOption: function () {
+            return {
+                step: 0.5,
+                limitMoveNum: 5
+            }
+        }
+    },
     mounted() {
       let _this = this;
       let carsouleDom = document.querySelector(".carousel_wrap");
       carsouleDom.style.height = (1190*818/1538)+'px'
-      // console.log(this.axios);
       async function drawMap() {
         _this.mapData = await _this.reqMapData();
         //   _this.mapSetOption()
@@ -517,10 +607,6 @@
 </script>
 
 <style>
-  .content {
-    padding-top: 0 !important;
-  }
-
   .section {
     padding-top: 150px;
   }
@@ -608,11 +694,41 @@
     background-color: #ddd;
   }
 
-  .map_info {
-    flex: 1.5;
-    background-color: bisque;
-  }
+  .order_info_wrap {
+      display:flex;
+      flex-direction: column;
 
+    flex: 1.5;
+    /* background-color: bisque; */
+  }
+.contact_wrap{
+    flex:1;
+}
+.order_info{
+    flex:1;
+}
+.order_wrap{
+
+}
+.order_table{
+
+}
+.seamless_wrap {
+    height: 260px;
+    width: 100%;
+    overflow: hidden;
+}
+.seamless_wrap ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+.seamless_wrap li {
+    line-height: 30px;
+    word-break: break-all;
+    font-size: 15px;
+    margin-bottom:15px;
+}
   .map_main {
     flex: 4;
   }

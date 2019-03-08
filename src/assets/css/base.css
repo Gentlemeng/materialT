@@ -23,3 +23,26 @@
 .hide{
     display: none;
 }
+/* 超出三行溢出隐藏 */
+.col_3_hide{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+/* 超出两行溢出隐藏 */
+.col_2_hide{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.col_1_hide{
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+/* 卡片标题样式 */
+.card_title{
+    font-size:18px;
+}

@@ -18,8 +18,8 @@ export default new Router({
           path: '/company_introduce',
           component: resolve => require(['./../components/Intruduce.vue'], resolve)
         },
-        {
-          path: '/products',
+        { 
+          path: '/products',    
           component: resolve => require(['../components/Products.vue'], resolve),
           children:[{
               path:'/productDetail',
