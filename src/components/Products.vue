@@ -50,14 +50,21 @@
             return {
                 productTree: [
                     {
-                        label: '一级 1',
-                        children: [{
-                            label: '二级 1-1',
-                            children: [{
-                                label: '三级 1-1-1',
-                                id:"123"
-                            }]
-                        }]
+                        label: '轨道',
+                        children: []
+                    },
+                    {
+                        label: '钢材',
+                        // children: [{
+                        //     label: '子分类一',
+                        //     children: [{
+                        //         label: '子子分类一',
+                        //         id:"123"
+                        //     }]
+                        // }]
+                    },
+                    {
+                        label:'建筑类'
                     }
                 ],
                 defaultProps: {
