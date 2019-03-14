@@ -21,15 +21,15 @@
                             <li class="product_list" v-for="(list,index) in productData" :key="index" @click="clickProduct">
                                 <el-card class="product_main" shadow="hover" :body-style="productBodyStyle">
                                     <img class="product_img" :src="list.pro_img"/>
-                                    <p class="product_name">{{list.pro_name}}</p>
-                                    <p class="product_time">{{list.pro_time}}</p>
+                                    <p class="product_name">{{list.SUB_NAME}}</p>
+                                    <p class="product_time">{{list.pro_time?list.pro_time:'2019-03-14'}}</p>
                                 </el-card>
                             </li>
                         </ul>
                         <pagination :total="pagination.total"
                             :page-size="pagination.pageSize" 
                             :current-page="pagination.currentPage"
-                            :req-list-fn="reqProductList" v-on:currentPage="viewCurrentPage">
+                            :req-list-fn="reqProductListByPage" v-on:currentPage="productCurrentPage">
                         </pagination>
                         <router-view class="product_detail"></router-view>
                     </div>
@@ -40,59 +40,42 @@
 </template>
 
 <script>
-  import pagination from "./common/Pagination.vue"
-
+    import pagination from "./common/Pagination.vue"
+    import url from './../serviceAPI.config.js'
     export default {
         components: {
             pagination
         },
         data() {
             return {
-                productTree: [
-                    {
-                        label: '轨道',
-                        children: []
-                    },
-                    {
-                        label: '钢材',
-                        // children: [{
-                        //     label: '子分类一',
-                        //     children: [{
-                        //         label: '子子分类一',
-                        //         id:"123"
-                        //     }]
-                        // }]
-                    },
-                    {
-                        label:'建筑类'
-                    }
-                ],
+                productTree: [],
                 defaultProps: {
                     children: 'children',
-                    label: 'label'
+                    label: 'CATEGORY_NAME',
+                    isLeaf:'ISLEAF',
                 },
                 productData:[
-                    {
-                        pro_img:'./../static/img/product/01.jpg',
-                        pro_name:'43KG重轨',
-                        pro_time:'2019-03-06',
-                    },{
-                        pro_img:'./../static/img/product/01.jpg',
-                        pro_name:'43KG重轨',
-                        pro_time:'2019-03-06',
-                    },{
-                        pro_img:'./../static/img/product/01.jpg',
-                        pro_name:'43KG重轨',
-                        pro_time:'2019-03-06',
-                    },{
-                        pro_img:'./../static/img/product/01.jpg',
-                        pro_name:'43KG重轨',
-                        pro_time:'2019-03-06',
-                    },{
-                        pro_img:'./../static/img/product/01.jpg',
-                        pro_name:'43KG重轨',
-                        pro_time:'2019-03-06',
-                    }
+                    // {
+                    //     pro_img:'./../static/img/product/01.jpg',
+                    //     pro_name:'43KG重轨',
+                    //     pro_time:'2019-03-06',
+                    // },{
+                    //     pro_img:'./../static/img/product/01.jpg',
+                    //     pro_name:'43KG重轨',
+                    //     pro_time:'2019-03-06',
+                    // },{
+                    //     pro_img:'./../static/img/product/01.jpg',
+                    //     pro_name:'43KG重轨',
+                    //     pro_time:'2019-03-06',
+                    // },{
+                    //     pro_img:'./../static/img/product/01.jpg',
+                    //     pro_name:'43KG重轨',
+                    //     pro_time:'2019-03-06',
+                    // },{
+                    //     pro_img:'./../static/img/product/01.jpg',
+                    //     pro_name:'43KG重轨',
+                    //     pro_time:'2019-03-06',
+                    // }
                 ],
                 productConStyle:{
                     flex:1,
@@ -106,10 +89,12 @@
                     "justify-content": "space-around",
                     "align-items": "center",
                 },
-                productPage:1,
+                productSlectedId:'',
+                pageNum:1,
+                pageSize:8,
                 pagination:{
-                    total:15,
-                    pageSize:1,
+                    total:1,
+                    pageSize:8,
                     currentPage:1,
                 },
                 dialogVisible:false,
@@ -120,20 +105,65 @@
             // let dialogDom = document.querySelector(".product_dialog")
             // dialogDom.style.margin = "0px"
             // dialogDom.style.height = "100%"
+            this.reqTreeData()
         },
         methods:{
-            clickProTree:function(obj,node,ele){
-                if(node.isLeaf){
-                    console.log(obj)
-                    console.log(node)
-                    console.log(ele)
-                }
-            },
-            reqProductList:function(){
+            reqTreeData:function(){
+                // this.axios.get(url.category)
+                //     .then(res=>{
+                //         // console.log(res);
+                //         if(res.data && res.data.code==200){
+                //             this.productTree = res.data.data
+                //         }
+                //     }).catch(err=>{
+                //         console.log(err)
+                //     })
 
+                    (async()=>{
+                        try{
+                            let result = await this.axios.get(url.category)
+                            // console.log(result)
+                            if(result.data && result.data.code==200){
+                                this.productTree = result.data.data
+
+                                if(this.productTree.length){
+                                    this.productSlectedId = this.productTree[0].ID 
+                                    this.reqProductList()
+                                }
+                            }
+                        }catch(err){
+                            console.log(err)
+                        }
+                    })()
             },
-            viewCurrentPage(page){
-                this.productPage = page;
+            clickProTree:function(obj,node,ele){
+                
+                this.productSlectedId = obj.ID
+                this.reqProductList()
+                
+            },
+            reqProductListByPage(){
+                this.reqProductList(this.pageNum)
+            },
+            reqProductList:function(pageNum=1){
+                this.axios({url:url.category_sub,
+                    method:'post',
+                    data:{
+                        categoryId:this.productSlectedId,
+                        pageNum:pageNum,
+                        pageSize:this.pageSize
+                    }
+                }).then(res=>{
+                    if(res.data.code==200){
+                        this.pagination.total = res.data.count
+                        this.productData = res.data.data
+                    }
+                }).catch(err=>{
+                    console.log(err)
+                })
+            },
+            productCurrentPage(page){
+                this.pageNum = page;
             },
             clickProduct:function(){
                 // this.dialogVisible = true;

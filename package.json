@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "echarts": "^4.1.0",
-    "element-ui": "^2.4.6",
+    "element-ui": "^2.4.4",
     "fullpage.js": "^3.0.2",
     "lib-flexible": "^0.3.2",
     "px2rem-loader": "^0.1.9",

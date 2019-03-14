@@ -47,6 +47,7 @@
                 // this.reqListFn(pageNum);
             },
             currentPagechange(pageNum) {
+                // console.log(pageNum)
                 this.$emit("currentPage",pageNum);
                 this.reqListFn(pageNum);        
             }
