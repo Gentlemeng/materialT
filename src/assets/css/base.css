@@ -1,3 +1,18 @@
+@media screen and (min-width:1423px){
+    .nav nav{
+        width:50% !important;
+    }
+}
+@media screen and (min-width:1237px) and (max-width:1422px){
+    .nav nav{
+        width:60% !important;
+    }
+}
+@media screen and (min-width:1000px) and (max-width:1236px){
+    .nav nav{
+        width:81% !important;
+    }
+}
 .clear:after {
     display: block;
     clear: both;

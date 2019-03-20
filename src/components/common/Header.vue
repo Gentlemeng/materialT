@@ -195,4 +195,7 @@
     flex: 1;
     height: 100%;
   }
+  .nav nav{
+    min-width:697px;
+  }
 </style>

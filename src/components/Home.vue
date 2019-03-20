@@ -107,6 +107,9 @@
         }, {
           url: './../static/img/carousel/02.jpg',
           info: "从业10余年，专注服务客户"
+        }, {
+          url: './../static/img/carousel/03.jpg',
+          info: "从业10余年，专注服务客户"
         }],
         contactData:[
             {
@@ -691,7 +694,7 @@
     width: 1190px;
     height: 100%;
     margin: 0 auto;
-    background-color: #ddd;
+    /* background-color: #ddd; */
   }
 
   .order_info_wrap {

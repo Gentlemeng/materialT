@@ -19,7 +19,7 @@
                     <span class="card_title">联系我们</span>
                 </div>
                 <div class="card-body">
-                    <el-form ref="contactForm" :model="contactForm" :rules="rules" label-width="80px" width="360px">
+                    <el-form ref="contactForm" :model="contactForm" :rules="rules" label-width="120px" width="360px">
                         <el-form-item label="姓名" prop="name">
                             <el-input v-model="contactForm.name"></el-input>
                         </el-form-item>
