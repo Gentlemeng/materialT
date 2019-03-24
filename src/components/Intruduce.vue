@@ -77,10 +77,10 @@
 }
 .introduce{
     width:1190px;
-    margin: auto;
+    margin: 20px auto 0;
 }
 .introduce h3{
-    margin: 0 0 40px;
+    margin: 0 0 10px;
     font-size: 40px;
     line-height: 54px;
     font-weight: 800;
@@ -89,12 +89,13 @@
 #allmap{
     width:100%;
     height:500px;
-    margin:40px auto;
+    margin: 20px auto;
 }
 .introduce_txt{
     text-indent: 2em;
     line-height:28px;
     font-size:18px;
     color:#666;
+    margin-bottom: 10px;
 }
 </style>
