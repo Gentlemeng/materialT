@@ -1,6 +1,5 @@
 <template>
     <div>
-        
         <div class="detail_wrap">
             <div class="product_intro">
                 <div class="view_num_wrap">
@@ -38,37 +37,44 @@
 </template>
 
 <script>
+    import url from './../serviceAPI.config.js'
     export default {
         data() {
             return {
                 // productDetailSrc: "./../static/img/product/01-detail.jpg"
-                infoData:[{
-                    infoName:'产品',
-                    value:'荆门矿工配件'
-                },{
-                    infoName:'单价',
-                    value:'1.00元/件'
-                },{
-                    infoName:'最小起订量',
-                    value:'1'
-                },{
-                    infoName:'供货总量',
-                    value:"100"
-                },{
-                    infoName:'发货期限',
-                    value:'自买家付款之日起3天内发货'
-                },{
-                    infoName:'有效期至',
-                    value:'2015-04-17'
-                },{
-                    infoName:'最后更新',
-                    value:'2019-03-7'
-                },]
+                infoData:[],
+                productId:this.$route.params.productId
             }
+        },
+        mounted () {
+            setTimeout(()=>{
+                // console.log(this.$route.params.productId);
+                this.productId = this.$route.params.productId
+            })
+            // console.log(this.$route.query);
+            // debugger;
+            this.getProductDetail()
         },
         methods:{
             goBack:function(){
                 this.$router.push({path:'/products'})
+            },
+            getProductDetail:function(){
+                this.axios({  
+                    url: url.product_detail,
+                    method: 'post',
+                    data: {
+                        productId: this.productId
+                    }
+                }).then(res => {
+                    if (res.data.code == 200) {
+                        console.log(res.data.data)
+
+                        // this.infoData = res.data.data
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
             },
             preProduct:function(){
 

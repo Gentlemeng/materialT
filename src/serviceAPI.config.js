@@ -9,7 +9,9 @@ const URL = {
     category:BASEURL+'category',
     //子类
     category_sub:BASEURL+'category_sub',
-    //资讯中心
+    //产品详情
+    product_detail:BASEURL+'productDetail',
+//资讯中心
 
     //联系方式页
     contact:BASEURL+'contact',
