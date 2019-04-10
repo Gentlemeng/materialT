@@ -1,15 +1,15 @@
 <template>
-    <div>
+    <!-- <div class=""> -->
         <div class="detail_wrap">
             <div class="product_intro">
                 <div class="view_num_wrap">
-                    <el-alert
+                    <!-- <el-alert
                         class="view_num"
                         type="success"
                         center
                         :closable="false">
                         浏览人数10
-                    </el-alert>
+                    </el-alert> -->
                 </div>
                 <div class="product_img">
                     <img src="./../../static/img/product/01-detail.jpg"/>
@@ -27,13 +27,13 @@
                         </el-table>
                     </template>
                     <div class="tab_product">
-                        <el-button round @click="preProduct">上一个</el-button>
-                        <el-button round @click="nextProduct">下一个</el-button>
+                        <el-button round @click="switchProduct(preId)" :id="preId" :disabled="!Boolean(preId.length)">上一个</el-button>
+                        <el-button round @click="switchProduct(nextId)" :id="nextId" :disabled="!Boolean(nextId.length)">下一个</el-button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -43,16 +43,22 @@
             return {
                 // productDetailSrc: "./../static/img/product/01-detail.jpg"
                 infoData:[],
-                productId:this.$route.params.productId
+                productId:this.$route.params.productId||function(){
+                    return sessionStorage.getItem("productId")
+                }(),
+                preId:'',
+                nextId:''
             }
         },
         mounted () {
+            let _this = this
             setTimeout(()=>{
                 // console.log(this.$route.params.productId);
-                this.productId = this.$route.params.productId
+                _this.productId = _this.$route.params.productId
             })
             // console.log(this.$route.query);
             // debugger;
+
             this.getProductDetail()
         },
         methods:{
@@ -60,6 +66,7 @@
                 this.$router.push({path:'/products'})
             },
             getProductDetail:function(){
+                sessionStorage.setItem("productId",this.productId)
                 this.axios({  
                     url: url.product_detail,
                     method: 'post',
@@ -68,20 +75,37 @@
                     }
                 }).then(res => {
                     if (res.data.code == 200) {
-                        console.log(res.data.data)
-
-                        // this.infoData = res.data.data
+                        // console.log(res.data.data)
+                        if(res.data.data.result.length){
+                            let detailData = JSON.parse(res.data.data.result[0].DETAIL);
+                            this.infoData = detailData;
+                        }
+                        this.preId = res.data.data.preId
+                        this.nextId = res.data.data.nextId
+                        // console.log(this.preId+'-----'+this.nextId)
                     }
                 }).catch(err => {
                     console.log(err)
                 })
             },
-            preProduct:function(){
-
+            switchProduct:function(productId){
+                if(productId){
+                    this.productId = productId;
+                    this.getProductDetail()
+                    // console.log(productId);
+                }else{
+                    this.$message({
+                        message: "到头了",
+                        type: 'warning'
+                    });
+                }
             },
-            nextProduct:function(){
-
-            }
+            // preProduct:function(){
+            //     this.switchProduct("",1)
+            // },
+            // nextProduct:function(){
+            //     this.switchProduct("",-1)
+            // }
         }
     }
 </script>
