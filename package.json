@@ -19,9 +19,11 @@
     "px2rem-loader": "^0.1.9",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
+    "vue-echarts": "^4.0.1",
     "vue-fullpage.js": "0.0.5",
     "vue-router": "^3.0.1",
-    "vue-seamless-scroll": "^1.1.16"
+    "vue-seamless-scroll": "^1.1.16",
+    "resize-detector": "^0.1.9"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

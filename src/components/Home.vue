@@ -16,50 +16,49 @@
       </section>
       <section class="section">
         <!-- <div class="slide"> -->
-          <div class="map_wrap">
-            <aside class="order_info_wrap">
-                <div class="order_info">
-                    <el-card class="order_wrap">
-                        <div slot="header">
-                            <span class="card_title">客户订单发货</span>
-                        </div>
-                        <div class="order_table">
-                            <!-- <div  -->
-                            <vue-seamless-scroll
-                            :data="listData" :class-option="classOption" class="seamless_wrap">
-                                <ul class="item">
-                                    <li v-for="(item,index) in listData" :key="index" class="col_2_hide">
-                                        <span>一批</span><span v-text="item.product"></span>
-                                        <span>已发往</span><span v-text="item.target"></span>
-                                        <span>客户：</span><span v-text="item.buyer"></span>
-                                        <span>联系电话:</span><span v-text="item.phone"></span>
-                                    </li>
-                                </ul>
-                            <!-- </div> -->
-                            </vue-seamless-scroll>
-                        </div>
-                    </el-card>
+        <div class="map_wrap">
+          <aside class="order_info_wrap">
+            <div class="order_info">
+              <el-card class="order_wrap">
+                <div slot="header">
+                  <span class="card_title">客户订单发货</span>
                 </div>
-                <div class="contact_wrap">
-                    <el-card class="contact_card">
-                        <div slot="header">
-                            <span class="card_title">联系方式</span>
-                        </div>
-                        <div class="contact_table">
-                            <template>
-                                <el-table :data="contactData" @show-header="false" style="width:100%" :show-header="false">
-                                    <el-table-column prop="type" label="类型"></el-table-column>
-                                    <el-table-column prop="value" label="内容"></el-table-column>
-                                </el-table>
-                            </template>
-                        </div>
-                    </el-card>
+                <div class="order_table">
+                  <!-- <div  -->
+                  <vue-seamless-scroll :data="listData" :class-option="classOption" class="seamless_wrap">
+                    <ul class="item">
+                      <li v-for="(item,index) in listData" :key="index" class="col_2_hide">
+                        <span>一批</span><span v-text="item.product"></span>
+                        <span>已发往</span><span v-text="item.target"></span>
+                        <span>客户：</span><span v-text="item.buyer"></span>
+                        <span>联系电话:</span><span v-text="item.phone"></span>
+                      </li>
+                    </ul>
+                    <!-- </div> -->
+                  </vue-seamless-scroll>
                 </div>
-                
-            </aside>
-            <section class="map_main">
-              <div id="map"></div>
-            </section>
+              </el-card>
+            </div>
+            <div class="contact_wrap">
+              <el-card class="contact_card">
+                <div slot="header">
+                  <span class="card_title">联系方式</span>
+                </div>
+                <div class="contact_table">
+                  <template>
+                    <el-table :data="contactData" @show-header="false" style="width:100%" :show-header="false">
+                      <el-table-column prop="type" label="类型"></el-table-column>
+                      <el-table-column prop="value" label="内容"></el-table-column>
+                    </el-table>
+                  </template>
+                </div>
+              </el-card>
+            </div>
+
+          </aside>
+          <section class="map_main">
+            <div id="map"></div>
+          </section>
           <!-- </div> -->
 
         </div>
@@ -72,6 +71,13 @@
 </template>
 
 <script>
+//   console.log(echarts)
+// 按需引入
+    let echarts = require('echarts/lib/echarts')
+    require('echarts/lib/chart/lines')
+    require('echarts/lib/chart/effectScatter')
+    require('echarts/lib/chart/map')
+    require('echarts/lib/component/geo')
   import Header from "./common/Header.vue"
   import vueSeamlessScroll from 'vue-seamless-scroll'
   export default {
@@ -102,7 +108,8 @@
         },
         // carouselImg
         carouselImg: [{
-          url: './../static/img/carousel/01.jpg',
+          //   url: './../static/img/carousel/01.jpg',
+          url: '',
           info: "从业10余年，专注服务客户"
         }, {
           url: './../static/img/carousel/02.jpg',
@@ -111,49 +118,47 @@
           url: './../static/img/carousel/03.jpg',
           info: "从业10余年，专注服务客户"
         }],
-        contactData:[
-            {
-                type: '电话',
-                value: '0310-3120336'
-            }, {
-                type: '联系人',
-                value: '安经理'
-            },{
-                type: '手机号码',
-                value: '13831000156'
-            }
-        ],
+        contactData: [{
+          type: '电话',
+          value: '0310-3120336'
+        }, {
+          type: '联系人',
+          value: '安经理'
+        }, {
+          type: '手机号码',
+          value: '13831000156'
+        }],
         listData: [{
-            product:'建筑配件、螺杆、穿墙丝',
-            target:'广府古城',
-            buyer:'李经理',
-            phone:'183*****519',
-        },{
-            product:'建筑配件、螺杆、穿墙丝',
-            target:'广府古城',
-            buyer:'李经理',
-            phone:'183*****519',
-        },{
-            product:'建筑配件、螺杆、穿墙丝',
-            target:'广府古城',
-            buyer:'李经理',
-            phone:'183*****519',
-        },{
-            product:'建筑配件、螺杆、穿墙丝',
-            target:'广府古城',
-            buyer:'李经理',
-            phone:'183*****519',
-        },{
-            product:'建筑配件、螺杆、穿墙丝',
-            target:'广府古城',
-            buyer:'李经理',
-            phone:'183*****519',
-        },{
-            product:'建筑配件、螺杆、穿墙丝',
-            target:'广府古城',
-            buyer:'李经理',
-            phone:'183*****519',
-        },],
+          product: '建筑配件、螺杆、穿墙丝',
+          target: '广府古城',
+          buyer: '李经理',
+          phone: '183*****519',
+        }, {
+          product: '建筑配件、螺杆、穿墙丝',
+          target: '广府古城',
+          buyer: '李经理',
+          phone: '183*****519',
+        }, {
+          product: '建筑配件、螺杆、穿墙丝',
+          target: '广府古城',
+          buyer: '李经理',
+          phone: '183*****519',
+        }, {
+          product: '建筑配件、螺杆、穿墙丝',
+          target: '广府古城',
+          buyer: '李经理',
+          phone: '183*****519',
+        }, {
+          product: '建筑配件、螺杆、穿墙丝',
+          target: '广府古城',
+          buyer: '李经理',
+          phone: '183*****519',
+        }, {
+          product: '建筑配件、螺杆、穿墙丝',
+          target: '广府古城',
+          buyer: '李经理',
+          phone: '183*****519',
+        }, ],
         mapData: null,
         geoCoordMap: { //可以在地图上显示的城市的坐标信息
           '成都': [103.9526, 30.7617],
@@ -332,17 +337,17 @@
       };
     },
     computed: {
-        classOption: function () {
-            return {
-                step: 0.5,
-                limitMoveNum: 5
-            }
+      classOption: function () {
+        return {
+          step: 0.5,
+          limitMoveNum: 5
         }
+      }
     },
     mounted() {
       let _this = this;
       let carsouleDom = document.querySelector(".carousel_wrap");
-      carsouleDom.style.height = (1190*818/1538)+'px'
+      carsouleDom.style.height = (1190 * 818 / 1538) + 'px'
       async function drawMap() {
         _this.mapData = await _this.reqMapData();
         //   _this.mapSetOption()
@@ -428,7 +433,7 @@
             },
             lineStyle: {
               normal: {
-                color: _this.echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                color: echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                   offset: 0,
                   color: '#FFFFA8' // 出发
                 }, {
@@ -480,65 +485,9 @@
       },
       mapSetOption() {
         let mapDom = document.querySelector("#map")
-        let mapChart = this.echarts.init(mapDom)
-        this.echarts.registerMap('china', this.mapData);
-        //   let option = {
-        //     baseOption: {
-        //         tooltip: {
-        //             trigger: 'item',
-        //             formatter: function (result) { //回调函数，参数params具体格式参加官方API
-        //                 return result.name
-        //             }
-        //         },
-        //         title:{
-        //             text: '货运专线',
-        //             //subtext:'',
-        //             left: 'center',
-        //             top: '8%',
-        //             textAlign: 'auto',
-        //             textStyle: {
-        //                 color: '#c6251e',
-        //                 fontSize:26,
-        //             }
-        //         },
-        //         series: {
-        //             id: 'map',
-        //             type: 'map',
-        //             map: "china", //要和echarts.registerMap（）中第一个参数一致
-        //             left: 'center',
-        //             top:"15%",
-        //             width: 'auto',
-        //             height: 'auto',
-        //             selectedMode: 'single',
-        //             itemStyle: {
-        //                 normal: {
-        //                     borderWidth: 1,
-        //                     borderColor: 'rgba(0,0,0,.3)',
-        //                     areaColor: '#ddd',
-        //                     label: {
-        //                         show: false
-        //                     }
-        //                 },
-        //             },
-        //             //图形上的文本标签，可用于说明图形的一些数据信息
-        //             label: {
-        //                 normal: {
-        //                     show: true,
-        //                     /*是否城市名字*/
-        //                     textStyle: {
-        //                         color: 'rgba(0,0,0,0.8)'
-        //                     }
-        //                 },
-        //                 emphasis: {
-        //                     show: false
-        //                 }
-        //             },
-        //             markLine: {
-        //                 silent: true
-        //             },
-        //         }
-        //     }
-        //   }
+        let mapChart = echarts.init(mapDom)
+        echarts.registerMap('china', this.mapData);
+
         mapChart.setOption(this.mapBoxOption, true);
 
       },
@@ -615,29 +564,31 @@
   }
 
   .carousel {
-      position:relative;
-      width:1190px;
-      margin:0 auto;
+    position: relative;
+    width: 1190px;
+    margin: 0 auto;
     height: 100%;
   }
 
   .carousel_wrap {
-      width:1190px;
-    margin:0 auto;
-      /*width:1538px;
+    width: 1190px;
+    margin: 0 auto;
+    /*width:1538px;
       height:818px; */
     /* height: 70%; */
-    height:calc(1190px * 818px) / 1538px;
+    height: calc(1190px * 818px) / 1538px;
   }
-    .carousel_info{
-        width:100%;
-        position:absolute;
-        top:1em;
-        left:0;
-        font-size:30px;
-        text-align: center;
-        color:rgba(255,255,255,1);
-    }
+
+  .carousel_info {
+    width: 100%;
+    position: absolute;
+    top: 1em;
+    left: 0;
+    font-size: 30px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+  }
+
   .carousel_img {
     width: 100%;
     height: 100%;
@@ -698,40 +649,44 @@
   }
 
   .order_info_wrap {
-      display:flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
     flex: 1.5;
     /* background-color: bisque; */
   }
-.contact_wrap{
-    flex:1;
-}
-.order_info{
-    flex:1;
-}
-.order_wrap{
 
-}
-.order_table{
+  .contact_wrap {
+    flex: 1;
+  }
 
-}
-.seamless_wrap {
+  .order_info {
+    flex: 1;
+  }
+
+  .order_wrap {}
+
+  .order_table {}
+
+  .seamless_wrap {
     height: 260px;
     width: 100%;
     overflow: hidden;
-}
-.seamless_wrap ul {
+  }
+
+  .seamless_wrap ul {
     list-style: none;
     padding: 0;
     margin: 0 auto;
-}
-.seamless_wrap li {
+  }
+
+  .seamless_wrap li {
     line-height: 30px;
     word-break: break-all;
     font-size: 15px;
-    margin-bottom:15px;
-}
+    margin-bottom: 15px;
+  }
+
   .map_main {
     flex: 4;
   }
