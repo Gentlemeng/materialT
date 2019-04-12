@@ -355,7 +355,7 @@
       }
       drawMap();
 
-      // console.log(this.echarts);
+      // console.log(echarts);
     },
     methods: {
       //请求地图数据
@@ -487,7 +487,6 @@
         let mapDom = document.querySelector("#map")
         let mapChart = echarts.init(mapDom)
         echarts.registerMap('china', this.mapData);
-
         mapChart.setOption(this.mapBoxOption, true);
 
       },
