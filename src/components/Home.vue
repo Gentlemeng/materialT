@@ -350,7 +350,7 @@
       }
       drawMap();
 
-      // console.log(this.echarts);
+      // console.log(echarts);
     },
     methods: {
       //请求地图数据
@@ -428,7 +428,7 @@
             },
             lineStyle: {
               normal: {
-                color: _this.echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                color: echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                   offset: 0,
                   color: '#FFFFA8' // 出发
                 }, {
@@ -480,8 +480,8 @@
       },
       mapSetOption() {
         let mapDom = document.querySelector("#map")
-        let mapChart = this.echarts.init(mapDom)
-        this.echarts.registerMap('china', this.mapData);
+        let mapChart = echarts.init(mapDom)
+        echarts.registerMap('china', this.mapData);
         //   let option = {
         //     baseOption: {
         //         tooltip: {
