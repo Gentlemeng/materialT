@@ -1,6 +1,6 @@
-const BASEURL = 'http://localhost:3000/material/'
+// const BASEURL = 'http://localhost:3000/material/'
 //阿里云接口地址
-// const BASEURL = 'http://47.95.115.59:3000/material/'
+const BASEURL = 'http://47.95.115.59:3000/material/'
 
 const URL = {
     //公司首页

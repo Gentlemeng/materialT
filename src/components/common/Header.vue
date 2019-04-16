@@ -236,4 +236,13 @@
             width:66%;
         }
     }
+    @media screen and (min-width:751px) and (max-width:999px){
+        .nav nav{
+            width: 90%;
+            margin:auto;
+        }
+        .wel-text{
+          flex:1.8;
+        }
+    }
 </style>

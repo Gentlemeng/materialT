@@ -31,9 +31,15 @@ Vue.config.productionTip = false
 
 document.getElementsByTagName("title")[0].innerHTML = "邯郸市壮达物资有限公司",
 function () {
-    var e = document.documentElement.clientWidth / 750;
-    document.documentElement.style.fontSize = 40 * e + "px";
+    if(document.body.clientWidth<=750){
+      var e = document.documentElement.clientWidth / 750;
+        document.documentElement.style.fontSize = 100 * e + "px";
+        debugger
+    } 
 }();
+// window.onresize = function(event){
+//   console.log(document.body.clientWidth)
+// }
 new Vue({
   el: '#app',
   router,
