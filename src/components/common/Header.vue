@@ -30,11 +30,10 @@
       </div>
     </div>
     <div class="logo">
-      <div class="company-logo">
+      <!-- <div class="company-logo">
         <h1>
-          <!-- 壮达物资 -->
         </h1>
-      </div>
+      </div> -->
       <div class="nav">
         <Nav></Nav>
       </div>
@@ -56,11 +55,9 @@
 <style scoped>
   @import "./../../assets/icomoon.css";
 .header{
+    /* min-width:1190px; */
     width: 100%;
-    height: 150px;
-    position:fixed;
-    top:0;
-    left:0;
+    /* height: 150px; */
     z-index: 2;
     background-color:#fff;
 }
@@ -196,6 +193,47 @@
     height: 100%;
   }
   .nav nav{
-    min-width:697px;
+    /* min-width:697px; */
   }
+  /* header媒体查询相关 */  
+    /* @media screen and (max-width:999px) {
+        
+        .logo{
+            display:none;
+        }
+    } */
+    @media screen and (min-width:1px) and (max-width:767px) {
+        .contact{
+            display:none;
+        }
+        .wel-text{
+            text-align:center;
+        }
+        .logo{
+            display:none;
+        }
+        .section_carousel{
+            padding-top:0;
+        }
+    }
+    @media screen and (min-width:1701px) and (max-width:1920px){
+        .nav nav{
+            width:40119%;
+        }
+    }
+    @media screen and (min-width:1423px) and (max-width:1700px){
+        .nav nav{
+            width:50%;
+        }
+    }
+    @media screen and (min-width:1237px) and (max-width:1422px){
+        .nav nav{
+            width:56%;
+        }
+    }
+    @media screen and (min-width:1000px) and (max-width:1236px){
+        .nav nav{
+            width:66%;
+        }
+    }
 </style>

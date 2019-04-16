@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <full-page :options="options" id="fullpage">
-      <section class="section">
+      <section class="section_carousel">
         <!-- 首页走马灯 -->
-        <div class="carousel_wrap">
+        <div class="carousel_wrap" >
           <el-carousel :autoplay="false">
             <el-carousel-item v-for="(item,index) in carouselImg" :key="index">
               <div class="carousel">
@@ -14,7 +13,7 @@
           </el-carousel>
         </div>
       </section>
-      <section class="section">
+      <section class="section_map">
         <!-- <div class="slide"> -->
         <div class="map_wrap">
           <aside class="order_info_wrap">
@@ -66,10 +65,9 @@
       <!-- <section class="section">
         <h3>Section 3</h3>
       </section> -->
-    </full-page>
   </div>
 </template>
-
+  
 <script>
 //   console.log(echarts)
 // 按需引入
@@ -78,6 +76,7 @@
     require('echarts/lib/chart/effectScatter')
     require('echarts/lib/chart/map')
     require('echarts/lib/component/geo')
+
   import Header from "./common/Header.vue"
   import vueSeamlessScroll from 'vue-seamless-scroll'
   export default {
@@ -87,25 +86,6 @@
     },
     data() {
       return {
-        options: {
-          licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-          afterLoad: this.afterLoad,
-          scrollBar: false,
-          menu: "#menu",
-          navigation: true,
-          anchors: ["home", "business", "blank"],
-          sectionsColor: [
-            "#fff",
-            "#fff",
-            "#d7d7d7",
-            "#fec401",
-            "#1bcee6",
-            "#ee1a59",
-            "#2c3e4f",
-            "#ba5be9",
-            "#b4b8ab"
-          ],
-        },
         // carouselImg
         carouselImg: [{
           //   url: './../static/img/carousel/01.jpg',
@@ -334,6 +314,7 @@
           },
           series: null
         },
+        carsouleDomWidth:0,
       };
     },
     computed: {
@@ -342,12 +323,15 @@
           step: 0.5,
           limitMoveNum: 5
         }
-      }
+      },
     },
     mounted() {
       let _this = this;
+
       let carsouleDom = document.querySelector(".carousel_wrap");
-      carsouleDom.style.height = (1190 * 818 / 1538) + 'px'
+      this.carsouleDomWidth = Number(carsouleDom.offsetWidth)||1190;
+      carsouleDom.style.height = (this.carsouleDomWidth * 818 / 1538) + 'px'
+    //   debugger;
       async function drawMap() {
         _this.mapData = await _this.reqMapData();
         //   _this.mapSetOption()
@@ -357,11 +341,15 @@
 
       // console.log(echarts);
     },
+    created(){
+        // debugger
+        // console.log(document.querySelector(".carousel_wrap").style.width);
+    },
     methods: {
       //请求地图数据
       reqMapData() {
         return new Promise((resolve, reject) => {
-          this.axios('./../static/json/china.json')
+          axios('./../static/json/china.json')
             .then((res) => {
               // console.log(res);
               if (res.status === 200) {
@@ -488,68 +476,6 @@
         let mapChart = echarts.init(mapDom)
         echarts.registerMap('china', this.mapData);
         mapChart.setOption(this.mapBoxOption, true);
-
-      },
-      afterLoad() {
-        //   console.log("After load");
-      },
-      addSection(e) {
-        e.preventDefault();
-        var newSectionNumber =
-          document.querySelectorAll(".fp-section").length + 1;
-
-        // creating the section div
-        var section = document.createElement("div");
-        section.className = "section";
-        section.innerHTML = `<h3>Section ${newSectionNumber}</h3>`;
-
-        // adding section
-        document.querySelector("#fullpage").appendChild(section);
-
-        // creating the section menu element
-        var sectionMenuItem = document.createElement("li");
-        sectionMenuItem.setAttribute(
-          "data-menuanchor",
-          "page" + newSectionNumber
-        );
-        sectionMenuItem.innerHTML = `<a href="#page${newSectionNumber}">Section${newSectionNumber}</a>`;
-
-        // adding it to the sections menu
-        var sectionsMenuItems = document.querySelector("#menu");
-        sectionsMenuItems.appendChild(sectionMenuItem);
-
-        // adding anchor for the section
-        this.options.anchors.push(`page${newSectionNumber}`);
-
-        // we have to call `update` manually as DOM changes won't fire updates
-        // requires the use of the attribute ref="fullpage" on the
-        // component element, in this case, <full-page>
-        // ideally, use an ID element for that element too
-        this.$refs.fullpage.build();
-      },
-      removeSection() {
-        var sections = document
-          .querySelector("#fullpage")
-          .querySelectorAll(".fp-section");
-        var lastSection = sections[sections.length - 1];
-
-        // removing the last section
-        lastSection.parentNode.removeChild(lastSection);
-
-        // removing the last anchor
-        this.options.anchors.pop();
-
-        // removing the last item on the sections menu
-        var sectionsMenuItems = document.querySelectorAll("#menu li");
-        var lastItem = sectionsMenuItems[sectionsMenuItems.length - 1];
-        lastItem.parentNode.removeChild(lastItem);
-      },
-      toggleNavigation() {
-        this.options.navigation = !this.options.navigation;
-      },
-      toggleScrollbar() {
-        console.log("Changing scrollbar...");
-        this.options.scrollBar = !this.options.scrollBar;
       },
       // 自定义逻辑方法
 
@@ -558,19 +484,21 @@
 </script>
 
 <style>
-  .section {
-    padding-top: 150px;
+  .section_carousel {
+    padding-bottom:40px;
   }
 
   .carousel {
     position: relative;
-    width: 1190px;
+    width:100%;
+    max-width: 1190px;
     margin: 0 auto;
     height: 100%;
   }
 
   .carousel_wrap {
-    width: 1190px;
+    width: 62.6%;
+    max-width:1190px;
     margin: 0 auto;
     /*width:1538px;
       height:818px; */
@@ -622,7 +550,9 @@
   .el-carousel__item:nth-child(2n + 1) {
     /* background-color: #d3dce6; */
   }
-
+.section_map{
+    padding-bottom:40px;
+}
   /* 主要产品 */
   .container {
     width: 60%;
@@ -693,4 +623,12 @@
   #map {
     height: 100%;
   }
+  /* 媒体查询 */
+  @media screen and (min-width:1px) and (max-width:767px) {
+        .carousel_wrap{
+      width:100%;
+  }
+    }
+  
+  
 </style>

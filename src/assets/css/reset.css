@@ -1,6 +1,7 @@
 html {
-  overflow-x: auto;
-  /* overflow-y: scroll; */
+    overflow: hidden;
+  /* overflow-x: auto; */
+  overflow-y: scroll;
 }
 
 body,

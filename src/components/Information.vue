@@ -12,6 +12,6 @@
 
 <style scoped>
 .information_wrap{
-    padding-top:150px;
+    
 }
 </style>

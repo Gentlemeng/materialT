@@ -21,11 +21,13 @@ export default new Router({
         { 
           path: '/products',    
           component: resolve => require(['../components/Products.vue'], resolve),
-          children:[{
-              name:"productDetail",
-              path:'/productDetail',
-              component:resolve=>require(['../components/ProductDetail.vue'],resolve)
-          }]
+          children:[
+        //       {
+        //       name:"productDetail",
+        //       path:'/productDetail',
+        //       component:resolve=>require(['../components/ProductDetail.vue'],resolve)
+        //   }
+        ]
         },
         {
           path: '/information',

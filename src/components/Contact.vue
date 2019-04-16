@@ -102,12 +102,12 @@
         },
         methods:{
             reqContactData:function(){
-                this.axios.get(url.contact)
+                axios.get(url.contact)
                     .then((res)=>{
                         // console.log(res)
                         if(res.data.code==200){
-                            console.log(res);
-                            // this.companyIntroData = res.data.data[0]
+                            // console.log(res);
+                            this.contactData = res.data.data
                         }
                     })
             },
@@ -124,7 +124,6 @@
 
 <style scoped>
 .contact_wrap{
-    padding-top:150px;
 }
 .contact{
     width:1190px;

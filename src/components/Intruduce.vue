@@ -36,11 +36,11 @@
         },
         methods:{
             reqIntroData:function(){
-                this.axios.get(url.companyIntro)
+                axios.get(url.companyIntro)
                     .then((res)=>{
                         // console.log(res)
                         if(res.data.code==200){
-                            this.companyIntroData = res.data.data[0]
+                            this.companyIntroData = res.data.data[1]
                         }
                     })
             },
@@ -73,7 +73,6 @@
 
 <style scoped>
 .introduce_wrap{
-    padding-top:150px;
 }
 .introduce{
     width:1190px;

@@ -30,7 +30,43 @@
               :current-page="pagination.currentPage" :req-list-fn="reqProductListByPage"
               v-on:currentPage="productCurrentPage">
             </pagination>
-            <router-view class="product_detail"></router-view>
+            <!-- <router-view class=""></router-view> -->
+            <!-- 商品详情页 -->
+            <div class="detail_wrap product_detail" v-show="productShow">
+              <div class="product_intro">
+                <div class="view_num_wrap">
+                  <!-- <el-alert
+                        class="view_num"
+                        type="success"
+                        center
+                        :closable="false">
+                        浏览人数10
+                    </el-alert> -->
+                </div>
+                <div class="productDetail_img">
+                  <img src="./../../static/img/product/01-detail.jpg" />
+                </div>
+              </div>
+              <div class="product_info_wrap clear">
+                <!-- <div class="back_product right" @click="goBack">返回</div> -->
+                <el-button class="back_product right" @click="goBack">返回</el-button>
+                <!-- 商品列表 -->
+                <div class="product_info">
+                  <template>
+                    <el-table :data="infoData" @show-header="false" style="width:100%" :show-header="false">
+                      <el-table-column prop="infoName" label="类型"></el-table-column>
+                      <el-table-column prop="value" label="内容"></el-table-column>
+                    </el-table>
+                  </template>
+                  <div class="tab_product">
+                    <el-button round @click="switchProduct(preId)" :id="preId" :disabled="!Boolean(preId.length)">上一个
+                    </el-button>
+                    <el-button round @click="switchProduct(nextId)" :id="nextId" :disabled="!Boolean(nextId.length)">下一个
+                    </el-button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </el-card>
       </div>
@@ -75,6 +111,15 @@
           currentPage: 1,
         },
         dialogVisible: false,
+        // 产品详情相关
+        // productDetailSrc: "./../static/img/product/01-detail.jpg"
+        productShow:false,
+        infoData: [],
+        productId: this.productId || function () {
+          return sessionStorage.getItem("productId")
+        }(),
+        preId: '',
+        nextId: ''
       }
     },
     mounted() {
@@ -82,12 +127,23 @@
       // dialogDom.style.margin = "0px"
       // dialogDom.style.height = "100%"
       this.reqTreeData()
+
+      let _this = this
+      setTimeout(() => {
+        // console.log(this.$route.params.productId);
+        _this.productId = _this.$route.params.productId
+      })
+      // console.log(this.$route.query);
+      // debugger;
+
+      this.getProductDetail()
     },
     methods: {
+
       reqTreeData: function () {
         (async () => {
           try {
-            let result = await this.axios.get(url.category)
+            let result = await axios.get(url.category)
             // console.log(result)
             if (result.data && result.data.code == 200) {
               this.productTree = result.data.data
@@ -135,19 +191,20 @@
         // console.log(JSON.stringify(productNewArr));
       },
       clickProTree: function (obj, node, ele) {
-          //只有当前的分类与选择的不一样时才请求
-          if(obj.ID!=this.productSlectedId){
-                this.productSlectedId = obj.ID
-                this.reqProductList()
-          }
-        
+        //只有当前的分类与选择的不一样时才请求
+        if (obj.ID != this.productSlectedId) {
+          this.productSlectedId = obj.ID
+          this.reqProductList()
+        }
+        //回到产品页
+        this.productShow = false;
 
       },
       reqProductListByPage() {
         this.reqProductList(this.pageNum)
       },
       reqProductList: function (pageNum = 1) {
-        this.axios({
+        axios({
           url: url.category_sub,
           method: 'post',
           data: {
@@ -172,13 +229,49 @@
         // this.dialogVisible = true;
         // this.$router.push({path:'productDetail',query: {productData: pro_list}})
         // console.log(pro_list)
-        this.$router.push({
-          name: 'productDetail',
-          params: {
-            productId: pro_list.ID
+        this.productId = pro_list.ID
+        this.getProductDetail()
+        this.productShow = true
+      },
+      goBack: function () {
+        this.productShow = false;
+      },
+      getProductDetail: function () {
+        sessionStorage.setItem("productId", this.productId)
+        axios({
+          url: url.product_detail,
+          method: 'post',
+          data: {
+            productId: this.productId
           }
+        }).then(res => {
+          if (res.data.code == 200) {
+            // console.log(res.data.data)
+            if (res.data.data.result.length) {
+              let detailData = JSON.parse(res.data.data.result[0].DETAIL);
+              this.infoData = detailData;
+            }
+            this.preId = res.data.data.preId
+            this.nextId = res.data.data.nextId
+            // console.log(this.preId+'-----'+this.nextId)
+          }
+        }).catch(err => {
+          console.log(err)
         })
-      }
+      },
+      switchProduct: function (productId) {
+        if (productId) {
+          this.productId = productId;
+          this.getProductDetail()
+          // console.log(productId);
+        } else {
+          this.$message({
+            message: "到头了",
+            type: 'warning'
+          });
+        }
+      },
+
     }
   }
 </script>
@@ -189,7 +282,6 @@
   }
 
   .product_wrap {
-    padding-top: 150px;
   }
 
   .product {
@@ -264,5 +356,63 @@
     width: 100%;
     height: 100%;
     /* background-color:antiquewhite; */
+  }
+
+  /* 产品详情相关 */
+  .back_product {
+    /* position:absolute;
+        top:0;
+        right:0; */
+    /* font-size: 16px;
+        line-height: 32px;
+        padding: 10px; */
+  }
+
+  .detail_wrap {
+    display: flex;
+    height: 100%;
+    background-color: #fff;
+  }
+
+  .product_intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content:space-around; */
+    flex: 0.618;
+  }
+
+  .view_num_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  }
+
+  .productDetail_img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+  }
+
+  .product_intro img {
+    margin: auto;
+    width: 240px;
+    height: 180px;
+  }
+
+  .product_info_wrap {
+    flex: 1;
+  }
+
+  .tab_product {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
   }
 </style>

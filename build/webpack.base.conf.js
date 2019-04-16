@@ -79,9 +79,9 @@ module.exports = {
   },
   externals: {
     "BMap": "BMap",
-    'vue': 'Vue',
-    'router': 'VueRouter',
-    "echarts": "echarts",
+    // 'vue': 'Vue',
+    // 'router': 'VueRouter',
+    // "echarts": "echarts",
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
