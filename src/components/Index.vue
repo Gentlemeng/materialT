@@ -15,8 +15,12 @@ import Header from "./common/Header.vue"
         },
         created(){
             // this.$router.push("/home");
+            
         }
     }
 </script>
 <style scoped>
+.wrapper{
+    background-color:#fff;
+}
 </style>
