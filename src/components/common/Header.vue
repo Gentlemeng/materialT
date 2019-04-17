@@ -28,46 +28,87 @@
 
         </div>
       </div>
+      <div class="menu" @click="toggleMenu()">
+
+      </div>
+
     </div>
     <div class="logo">
       <!-- <div class="company-logo">
         <h1>
         </h1>
       </div> -->
+      <!-- pc端导航栏 -->
       <div class="nav">
         <Nav></Nav>
       </div>
     </div>
+    <!-- 移动端导航侧边栏 -->
+    <nav :class="[isShowMenu? 'active' : '','mobile_nav']">
+      <ul class="mobile_nav_ul">
+        <li class="mobile_nav_list" v-for="item in navData" :key="item.index">
+          <p>{{item.title}}</p>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
   import Nav from "./Nav.vue"
+  import navData from "./../../navData.js"
 
   export default {
     components: {
       Nav
     },
+    data() {
+      return {
+        navData: navData,
+        isShowMenu: false
+      }
+    },
+    methods: {
+      toggleMenu: function () {
+        this.isShowMenu = this.isShowMenu ? false : true;
+      }
+    }
 
   }
+
 </script>
 
 <style scoped>
   @import "./../../assets/icomoon.css";
-.header{
+
+  .header {
     /* min-width:1190px; */
     width: 100%;
     /* height: 150px; */
     z-index: 2;
-    background-color:#fff;
-}
+    background-color: #fff;
+  }
+
   .welcome {
+    position: relative;
     width: 100%;
     height: 40px;
     line-height: 40px;
     background-color: #3367d6;
     color: #fff;
     font-size: 14px;
+  }
+
+  .menu {
+    position: absolute;
+    top: 0;
+    left: 0.2rem;
+    display: none;
+    width: 0.8rem;
+    height: 100%;
+    background: url("./../../../static/img/side/menu.png") no-repeat center/60%;
+    /* background-color:#000; */
+    /* background-size:  */
   }
 
   .wel-box {
@@ -80,7 +121,7 @@
   .wel-text {
     flex: 1;
     height: 100%;
-    line-height: 40px;
+    /* line-height: 40px; */
   }
 
   .contact {
@@ -166,8 +207,9 @@
 
   /*logo区域*/
   .logo {
+    position: relative;
     display: flex;
-    height: 110px;
+    /* height: 110px; */
     padding: 0 60px;
   }
 
@@ -192,57 +234,79 @@
     flex: 1;
     height: 100%;
   }
-  .nav nav{
-    /* min-width:697px; */
+
+  .mobile_nav {
+    z-index: 3;
+    position: absolute;
+    top: 40px;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    background-color: #3367d6;
+    transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
   }
-  /* header媒体查询相关 */  
-    /* @media screen and (max-width:999px) {
-        
-        .logo{
-            display:none;
-        }
-    } */
-    @media screen and (min-width:1px) and (max-width:767px) {
-        .contact{
-            display:none;
-        }
-        .wel-text{
-            text-align:center;
-        }
-        .logo{
-            display:none;
-        }
-        .section_carousel{
-            padding-top:0;
-        }
+  .mobile_nav.active {
+    left: 0;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.5);
+  }
+  .mobile_nav_ul {
+      height:100%;
+  }
+
+  @media screen and (min-width:1701px) and (max-width:1920px) {}
+
+  @media screen and (min-width:1423px) and (max-width:1700px) {}
+
+  @media screen and (min-width:1237px) and (max-width:1422px) {}
+
+  @media screen and (min-width:1000px) and (max-width:1236px) {}
+
+  @media screen and (min-width:751px) and (max-width:999px) {
+    .wel-text {
+      flex: 1.8;
     }
-    @media screen and (min-width:1701px) and (max-width:1920px){
-        .nav nav{
-            width:40119%;
-        }
+  }
+
+  @media screen and (min-width: 1px) and (max-width: 750px) {
+    .menu {
+      display: block;
     }
-    @media screen and (min-width:1423px) and (max-width:1700px){
-        .nav nav{
-            width:50%;
-        }
+
+    .carousel_info {
+      font-size: 0.48rem;
     }
-    @media screen and (min-width:1237px) and (max-width:1422px){
-        .nav nav{
-            width:56%;
-        }
+
+    .carousel_wrap {
+      width: 100%;
     }
-    @media screen and (min-width:1000px) and (max-width:1236px){
-        .nav nav{
-            width:66%;
-        }
+
+    .map_wrap {
+      flex-direction: column-reverse;
     }
-    @media screen and (min-width:751px) and (max-width:999px){
-        .nav nav{
-            width: 90%;
-            margin:auto;
-        }
-        .wel-text{
-          flex:1.8;
-        }
+
+    .map_main {
+      height: 8rem;
     }
+
+    .contact {
+      display: none;
+    }
+
+    .wel-box {
+      width: 80%;
+    }
+
+    .wel-text {
+      text-align: center;
+    }
+
+    .section_carousel {
+      padding-top: 0;
+    }
+  }
+
 </style>

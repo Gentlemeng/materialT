@@ -34,7 +34,6 @@ function () {
     if(document.body.clientWidth<=750){
       var e = document.documentElement.clientWidth / 750;
         document.documentElement.style.fontSize = 100 * e + "px";
-        debugger
     } 
 }();
 // window.onresize = function(event){

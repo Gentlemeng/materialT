@@ -356,7 +356,7 @@ export default {
     let carsouleDom = document.querySelector(".carousel_wrap");
     this.carsouleDomWidth = Number(carsouleDom.offsetWidth) || 1190;
     // debugger;
-    console.log((this.carsouleDomWidth * 818 / 1538))
+    // console.log((this.carsouleDomWidth * 818 / 1538))
     carsouleDom.style.height = (this.carsouleDomWidth * 818 / 1538) + 'px'
 
     //   debugger;
@@ -512,6 +512,9 @@ export default {
 </script>
 
 <style>
+.home{
+    width:100%;
+}
 .section_carousel {
   padding-bottom: 40px;
 }
@@ -666,7 +669,9 @@ export default {
   }
 }
 @media screen and (min-width: 1px) and (max-width: 750px) {
-
+    .carousel_info{
+            font-size:0.48rem;
+        }
   .carousel_wrap {
     width: 100%;
   }
