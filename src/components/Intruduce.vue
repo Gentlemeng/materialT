@@ -75,7 +75,7 @@
 .introduce_wrap{
 }
 .introduce{
-    width:1190px;
+    max-width:1190px;
     margin: 20px auto 0;
 }
 .introduce h3{
