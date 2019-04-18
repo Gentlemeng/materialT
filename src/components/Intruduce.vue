@@ -73,6 +73,7 @@
 
 <style scoped>
 .introduce_wrap{
+    
 }
 .introduce{
     max-width:1190px;

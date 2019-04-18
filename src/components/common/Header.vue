@@ -43,32 +43,27 @@
         <Nav></Nav>
       </div>
     </div>
-    <!-- 移动端导航侧边栏 -->
-    <nav :class="[isShowMenu? 'active' : '','mobile_nav']">
-      <ul class="mobile_nav_ul">
-        <li v-for="(item,index) in navData" :key="item.index" :class="[item.isSelected?'active':'','mobile_nav_list']"  @click="switchRouter(index)">
-          <p>
-            <router-link class="nav_link" :to="{path: '/' + item.index}">{{item.title}} </router-link>
-          </p>
-        </li>
-      </ul>
-      <div :class="[isShowMenu? 'active' : '','mobile_nav_layer']"></div>
-    </nav>
+    
   </div>
 </template>
 
 <script>
   import Nav from "./Nav.vue"
-  import navData from "./../../navData.js"
 
   export default {
+      props:{
+          isShowMenu:{
+              type:Boolean,
+              default:false
+          }
+      },
     components: {
       Nav
     },
     data() {
       return {
-        navData: navData,
-        isShowMenu: false
+        //   isShowMenu:this.isShowMenu,
+        aaa:this.isShowMenu
       }
     },
     created() {
@@ -76,32 +71,21 @@
 
 
     },
+    computed:{
+        // aaa:function(){
+        //     return this.isShowMenu;
+        // }
+    },
     mounted() {
-      let _this = this;
-      let layer = document.querySelector(".mobile_nav");
-      // let layer = document.getElementsByClassName("mobile_nav")[0];
-      // debugger;
-      layer.addEventListener('touchstart', function (e) {
-        // console.log("aaa")
-        layer.addEventListener("touchmove", function (e) {
-          e.preventDefault();
-        })
-        //   return false;
-      })
-      layer.addEventListener("click", function (e) {
-        _this.isShowMenu = false;
-      })
     },
     methods: {
       toggleMenu: function () {
-        this.isShowMenu = this.isShowMenu ? false : true;
+
+        this.aaa = this.aaa ? false : true;
+        this.$emit("isShowMenu",this.aaa);
+
       },
-      switchRouter:function(index){
-          this.navData.forEach((item)=>{
-              item.isSelected = false;
-          })
-          this.navData[index].isSelected = true;
-      }
+      
     }
 
   }
@@ -263,53 +247,9 @@
     height: 100%;
   }
 
-  .mobile_nav {
-    overflow: hidden;
-    display: none;
-    z-index: 3;
-    position: absolute;
-    top: 40px;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    transition: all 0.2s ease-in;
-    -moz-transition: all 0.2s ease-in;
-    -webkit-transition: all 0.2s ease-in;
-    -o-transition: all 0.2s ease-in;
-  }
 
-  .mobile_nav.active {
-    left: 0;
-    /* box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2); */
-  }
 
-  .mobile_nav_ul {
-    width: 50%;
-    height: 100%;
-    background-color: #3367d6;
-  }
-
-  .mobile_nav_list {
-    height: 1rem;
-    line-height: 1rem;
-    font-size: 0.32rem;
-    color: #fff;
-    /* margin-left:0.8rem; */
-  }
-  .mobile_nav_list.active{
-      background-color:rgba(225,225,225,0.5)
-  }
-
-  .mobile_nav_list p {
-    text-align: center;
-  }
-
-  .nav_link {
-    color: #fff;
-  }
-
-  .mobile_nav_layer {
+  /* .mobile_nav_layer {
     width: 50%;
     position: absolute;
     top: 0;
@@ -320,11 +260,11 @@
     -moz-transition: all 0.2s ease-in;
     -webkit-transition: all 0.2s ease-in;
     -o-transition: all 0.2s ease-in;
-  }
+  } */
 
-  .mobile_nav.active .mobile_nav_layer {
+  /* .mobile_nav.active .mobile_nav_layer {
     left: 50%;
-  }
+  } */
 
   @media screen and (min-width: 1701px) and (max-width: 1920px) {}
 
@@ -344,9 +284,7 @@
     .menu {
       display: block;
     }
-    .mobile_nav{
-        display:flex;
-    }
+    
     .carousel_info {
       font-size: 0.48rem;
     }
