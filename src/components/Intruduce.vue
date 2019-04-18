@@ -3,13 +3,13 @@
         <section class="introduce">
             <h3 class="company_location">公司地址</h3>
             
-            <p class="introduce_txt" v-for="(text,index) in companyIntroData.address" :key="'address'+index">{{text}}</p>
+            <p class="introduce_txt justify" v-for="(text,index) in companyIntroData.address" :key="'address'+index">{{text}}</p>
             <div id="allmap"></div>
             <h3 class="company_sellRange">经营范围</h3>
-            <p class="introduce_txt" v-for="(text,index) in companyIntroData.sellRange" :key="'sellRange'+index">{{text}}</p>
+            <p class="introduce_txt justify" v-for="(text,index) in companyIntroData.sellRange" :key="'sellRange'+index">{{text}}</p>
 
             <h3 class="company_promise">业务承诺</h3>
-            <p class="introduce_txt" v-for="(text,index) in companyIntroData.promise" :key="'promise'+index">{{text}}</p>             
+            <p class="introduce_txt justify" v-for="(text,index) in companyIntroData.promise" :key="'promise'+index">{{text}}</p>             
         </section>
     </div>
 </template>
@@ -73,13 +73,13 @@
 
 <style scoped>
 .introduce_wrap{
-    
+    overflow: hidden;
 }
 .introduce{
     max-width:1190px;
     margin: 20px auto 0;
 }
-.introduce h3{
+.company_location,.company_sellRange,.company_promise{
     margin: 0 0 10px;
     font-size: 40px;
     line-height: 54px;
@@ -98,4 +98,18 @@
     color:#666;
     margin-bottom: 10px;
 }
+  @media screen and (min-width: 1px) and (max-width: 750px) {
+      .company_location,.company_sellRange,.company_promise{
+          font-size:0.4rem;
+          text-indent: 2em;
+          /* padding: 0 0.4rem; */
+      }
+      .introduce_txt{
+          padding:0 0.4rem;
+      }
+      #allmap{
+          /* margin:0;
+          padding:0.4rem; */
+      }
+  }
 </style>

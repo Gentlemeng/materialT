@@ -25,6 +25,16 @@
 .hide{
     display: none;
 }
+/* 两端对齐 */
+.justify{
+    text-align:justify;
+}
+.justify:after{
+    display:inline-block;
+    content:"";
+    overflow: hidden;
+    height:0;
+}
 /* 超出三行溢出隐藏 */
 .col_3_hide{
     display: -webkit-box;

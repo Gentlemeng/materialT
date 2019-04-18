@@ -81,7 +81,7 @@
     methods: {
       toggleMenu: function () {
 
-        this.aaa = this.aaa ? false : true;
+        this.aaa = this.isShowMenu ? false : true;
         this.$emit("isShowMenu",this.aaa);
 
       },

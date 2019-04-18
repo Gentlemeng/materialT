@@ -55,12 +55,8 @@ import Header from "./common/Header.vue"
         },
         methods:{
             getIsShowMenu: function (isShowMenu) {
-                this.isShowMenu = isShowMenu ? false : true;
-            },
-            toggleMenu: function () {
-                this.isShowMenu = this.isShowMenu ? false : true;
-                this.$emit("isShowMenu",this.isShowMenu);
-
+                // this.isShowMenu = isShowMenu ? false : true;
+                this.isShowMenu = isShowMenu;
             },
             switchRouter:function(index){
                 this.navData.forEach((item)=>{
@@ -79,10 +75,10 @@ import Header from "./common/Header.vue"
 }
 .main{
     position:relative;
-    transition: all 0.1s ease-in;
-    -moz-transition: all 0.1s ease-in;
-    -webkit-transition: all 0.1s ease-in;
-    -o-transition: all 0.1s ease-in;
+    transition: all 0.15s ease-in;
+    -moz-transition: all 0.15s ease-in;
+    -webkit-transition: all 0.15s ease-in;
+    -o-transition: all 0.15s ease-in;
 }
 .main.active{
     /* translateX:50%; */
