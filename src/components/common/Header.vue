@@ -134,7 +134,6 @@
   .wel-text {
     flex: 1;
     height: 100%;
-    /* line-height: 40px; */
   }
 
   .contact {
@@ -284,37 +283,32 @@
     .menu {
       display: block;
     }
-    
-    .carousel_info {
-      font-size: 0.48rem;
-    }
-
-    .carousel_wrap {
-      width: 100%;
-    }
-
-    .map_wrap {
-      flex-direction: column-reverse;
-    }
-
-    .map_main {
-      height: 8rem;
+    .header{
+        z-index:3;
+        /* position:fixed;
+        top:0;
+        left:0; */
+        /* height:0.8rem; */
     }
 
     .contact {
       display: none;
     }
-
+    .welcome{
+        height:0.8rem;
+        /* line-height:0.8rem; */
+    }
     .wel-box {
       width: 80%;
+      /* height:100%; */
     }
 
     .wel-text {
+        height:0.8rem;
+        line-height: 0.8rem;
       text-align: center;
     }
 
-    .section_carousel {
-      padding-top: 0;
-    }
+    
   }
 </style>

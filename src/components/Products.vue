@@ -2,6 +2,7 @@
   <div class="product_wrap">
     <div class="product">
       <aside class="product_aside">
+          <!-- pc端样式 -->
         <el-card class="product_category_wrap">
           <div slot="header">
             <span class="card_title">产品分类</span>
@@ -10,8 +11,15 @@
             <el-tree :data="productTree" :props="defaultProps" @node-click="clickProTree"></el-tree>
           </div>
         </el-card>
+        <!-- 移动端样式 -->
+        <ul class="product_category_ul">
+            <li :class="[data.ID==productSlectedId?'active':'','product_category_list']" v-for="(data,index) in productTree" :key="data.index" @click="mobileCategoryClick(index)">
+                {{data.CATEGORY_NAME}}
+            </li>  
+        </ul>
       </aside>
       <div class="product_con">
+          <!-- pc端商品展示 -->
         <el-card class="product_list_wrap" :body-style="productConStyle">
           <div slot="header" class="product_header">
             <span class="card_title">产品列表</span>
@@ -69,6 +77,22 @@
             </div>
           </div>
         </el-card>
+        <!-- 移动端商品展示 -->
+        <div class="mobile_product_list_wrap">
+            <ul>
+                <li class="mobile_product_list" v-for="(list,index) in productData" :key="index" @click="clickProduct(list)">
+                    <img class="product_img" :src="list.pro_img"/>
+                    <p class="product_name">{{list.SUB_NAME}}</p>
+                    <p class="product_time">{{list.pro_time?list.pro_time:'2019-03-14'}}</p>
+                </li>
+            </ul>
+            <div class="mobile_product_detail_wrap" v-show="productShow">
+                <header>
+                    <div class="mobile_detail_back" @click="goBack">返回</div>
+                </header>
+                
+            </div>
+        </div>
       </div>
     </div>
   </div>
@@ -200,6 +224,16 @@
         this.productShow = false;
 
       },
+      mobileCategoryClick(index){
+        //   console.log(index)
+        var selectedId = this.productTree[index].ID
+        if(selectedId != this.productId){
+            this.productSlectedId = selectedId
+            this.reqProductList()
+        }
+        //回到产品页
+        this.productShow = false;
+      },
       reqProductListByPage() {
         this.reqProductList(this.pageNum)
       },
@@ -216,6 +250,9 @@
           if (res.data.code == 200) {
             this.pagination.total = res.data.count
             this.productData = res.data.data
+            if(this.productData%2){
+                // this.productData.push()
+            }
           }
         }).catch(err => {
           console.log(err)
@@ -225,10 +262,6 @@
         this.pageNum = page;
       },
       clickProduct: function (pro_list) {
-        // console.log(pro_list);
-        // this.dialogVisible = true;
-        // this.$router.push({path:'productDetail',query: {productData: pro_list}})
-        // console.log(pro_list)
         this.productId = pro_list.ID
         this.getProductDetail()
         this.productShow = true
@@ -285,7 +318,7 @@
   }
 
   .product {
-    width: 1190px;
+    max-width: 1190px;
     /* height:730px; */
     display: flex;
     margin: 0 auto;
@@ -295,7 +328,9 @@
     flex: 1.5;
     /* background-color:ivory; */
   }
-
+    .product_category_ul{
+        display:none;
+    }
   .product_category {
     font-size: 14px;
   }
@@ -310,7 +345,9 @@
     flex-direction: column;
     height: 100%;
   }
-
+    .mobile_product_list_wrap{
+        display:none;
+    }
   .product_list_wrap .el-card__header {
     height: auto;
   }
@@ -414,5 +451,86 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 10px;
+  }
+
+  /* 手机端样式 */
+  @media screen and (min-width: 1px) and (max-width: 750px) {
+      .product_wrap{
+          height:100%;
+      }
+      .product{
+          height:100%;
+          background-color:#fff;
+      }
+      .product_aside{
+          height:100%;
+          border-right:1px solid #ddd;
+      }
+      .product_category_wrap{
+          display:none;
+      }
+      .product_category_ul{
+          display:block;
+      }
+      .product_category_list{
+          height: 1rem;
+            line-height: 1rem;
+            font-size: 0.32rem;
+            color: #707070;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+      }
+      .product_category_list.active{
+          background-color:#707070;
+          color:#fff;
+      }
+      .product_con{
+          background-color:#fff;
+      }
+      .product_list_wrap{
+          display:none;
+      }
+      .mobile_product_list_wrap{
+          /* overflow: hidden; */
+          overflow-y: scroll;
+          display:block;
+          height:100%;
+      }
+        .mobile_product_list_wrap ul{
+            display:flex;
+            flex-wrap: wrap;
+            margin-top:0.48rem;
+        }
+        .mobile_product_list{
+            /* flex:1; */
+            width:50%;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom:0.48rem;
+        }
+        .mobile_product_list .product_img{
+            width:2rem;
+            height:2rem;
+        }
+        .mobile_product_list .product_name{
+            /* width:2rem; */
+            /* height:2rem; */
+            height:0.48rem;
+            line-height:0.48rem;
+        }
+        .mobile_product_list .product_name{
+            height:0.48rem;
+            line-height:0.48rem;
+        }
+        .mobile_product_detail_wrap{
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            background-color:#fff;
+            z-index: 3;
+        }
   }
 </style>

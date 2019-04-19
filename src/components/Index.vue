@@ -75,10 +75,10 @@ import Header from "./common/Header.vue"
 }
 .main{
     position:relative;
-    transition: all 0.15s ease-in;
-    -moz-transition: all 0.15s ease-in;
-    -webkit-transition: all 0.15s ease-in;
-    -o-transition: all 0.15s ease-in;
+    transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
 }
 .main.active{
     /* translateX:50%; */
@@ -98,15 +98,20 @@ import Header from "./common/Header.vue"
     display: none;
     z-index: 3;
     position: absolute;
-    top: 40px;
+    top: 0.8rem;
     left: -50%;
     width: 50%;
     height: 100%;
     margin: 0;
-    transition: all 0.1s ease-in;
+    transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -webkit-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+
+    /* transition: all 0.1s ease-in;
     -moz-transition: all 0.1s ease-in;
     -webkit-transition: all 0.1s ease-in;
-    -o-transition: all 0.1s ease-in;
+    -o-transition: all 0.1s ease-in; */
   }
 
   .mobile_nav.active {
@@ -141,6 +146,21 @@ import Header from "./common/Header.vue"
 
 
   @media screen and (min-width: 1px) and (max-width: 750px) {
+      body{
+          height:100%;
+      }
+      #app{
+          height:100%;
+      }
+      .wrapper{
+          height: 100%;
+          display:flex;
+          flex-direction: column;
+      }
+        .main{
+            flex:1;
+            overflow-y: scroll;
+        }
       .mobile_nav{
             display:flex;
         }

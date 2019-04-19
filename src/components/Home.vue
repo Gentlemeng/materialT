@@ -681,5 +681,8 @@ export default {
   .map_main{
     height:8rem;
   }
+  .section_carousel {
+      padding-top: 0;
+    }
 }
 </style>
