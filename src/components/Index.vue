@@ -2,8 +2,11 @@
     <div class="wrapper">
         <Header :isShowMenu="isShowMenu" v-on:isShowMenu="getIsShowMenu"></Header>
         <div :class="[isShowMenu? 'active' : '','main']">
-            <transition name="move" mode="out-in"><router-view></router-view></transition>
-            <div :class="[isShowMenu? 'active' : '','main_layer']" v-show="isShowMenu"></div>
+            <div class="aaa">
+                <transition name="move" mode="out-in"><router-view></router-view></transition>
+                <div :class="[isShowMenu? 'active' : '','main_layer']" v-show="isShowMenu"></div>   
+            </div>
+            
         </div>
         <!-- 移动端导航侧边栏 -->
         <nav :class="[isShowMenu? 'active' : '','mobile_nav']">
@@ -159,7 +162,13 @@ import Header from "./common/Header.vue"
       }
         .main{
             flex:1;
+            overflow: hidden;
+        }
+        .main .aaa{
+            width:100%;
+            height:100%;
             overflow-y: scroll;
+            -webkit-overflow-scrolling : touch;
         }
       .mobile_nav{
             display:flex;

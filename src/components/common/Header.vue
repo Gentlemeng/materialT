@@ -288,7 +288,7 @@
         /* position:fixed;
         top:0;
         left:0; */
-        /* height:0.8rem; */
+        height:0.8rem;
     }
 
     .contact {
@@ -307,6 +307,7 @@
         height:0.8rem;
         line-height: 0.8rem;
       text-align: center;
+      font-size:0.28rem;
     }
 
     

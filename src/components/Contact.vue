@@ -124,15 +124,23 @@
 
 <style scoped>
 .contact_wrap{
+    padding-top: 30px;
 }
 .contact{
-    width:1190px;
+    max-width:1190px;
+    width:100%;
     margin:auto;
 }
 .box-card{
     font-size:18px;
 }
 .el-form{
-    width:460px;
+    max-width:460px;
+    width:100%;
 }
+  @media screen and (min-width: 1px) and (max-width: 750px) {
+      .contact_wrap{
+          padding-top:0;
+      }
+  }
 </style>

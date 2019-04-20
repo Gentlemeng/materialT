@@ -114,7 +114,6 @@ export default {
       // carouselImg
       carouselImg: [{
         url: './../static/img/carousel/01.jpg',
-        url: '',
         info: "从业10余年，专注服务客户"
       }, {
         url: './../static/img/carousel/02.jpg',
@@ -514,6 +513,7 @@ export default {
 <style>
 .home{
     width:100%;
+    padding-top: 30px;
 }
 .section_carousel {
   padding-bottom: 40px;
@@ -528,7 +528,7 @@ export default {
 }
 
 .carousel_wrap {
-  width: 62.6%;
+  width:100%;
   max-width: 1190px;
   margin: 0 auto;
   /*width:1538px;
@@ -583,6 +583,7 @@ export default {
 }
 .section_map {
   padding-bottom: 40px;
+  margin: 0 auto;
 }
 /* 主要产品 */
 .container {
@@ -659,20 +660,23 @@ export default {
 }
 /* 媒体查询 */
 @media screen and (min-width: 1000px) and (max-width: 1236px) {
-  .carousel_wrap {
+  .carousel_wrap,.section_map {
     width: 85%;
   }
 }
 @media screen and (min-width: 751px) and (max-width: 999px) {
-  .carousel_wrap {
+  .carousel_wrap,.section_map {
     width: 90%;
   }
 }
 @media screen and (min-width: 1px) and (max-width: 750px) {
+  .home{
+    padding-top: 0px;
+  }
     .carousel_info{
             font-size:0.48rem;
         }
-  .carousel_wrap {
+    .carousel_wrap,.section_map {
     width: 100%;
   }
   .map_wrap{

@@ -74,13 +74,14 @@
 <style scoped>
 .introduce_wrap{
     overflow: hidden;
+    padding-top:30px;
 }
 .introduce{
     max-width:1190px;
-    margin: 20px auto 0;
+    margin: 0 auto;
 }
 .company_location,.company_sellRange,.company_promise{
-    margin: 0 0 10px;
+    /* margin: 0 0 10px; */
     font-size: 40px;
     line-height: 54px;
     font-weight: 800;
@@ -99,6 +100,11 @@
     margin-bottom: 10px;
 }
   @media screen and (min-width: 1px) and (max-width: 750px) {
+      .introduce_wrap{
+    padding-top:30px;
+
+      }
+
       .company_location,.company_sellRange,.company_promise{
           font-size:0.4rem;
           text-indent: 2em;

@@ -27,7 +27,7 @@ const navData = [{
   {
     // icon: "el-icon-menu",
     index: "contact",
-    title: "联系方式",
+    title: "关于我们",
     isSelected:false,
 
     // subs: [{
