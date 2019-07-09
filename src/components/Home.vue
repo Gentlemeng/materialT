@@ -86,6 +86,7 @@
         <!-- </div> -->
 
       </div>
+      <Footer></Footer>
     </section>
     <!-- <section class="section">
         <h3>Section 3</h3>
@@ -103,11 +104,14 @@ require('echarts/lib/chart/map')
 require('echarts/lib/component/geo')
 
 import Header from "./common/Header.vue"
+import Footer from "./common/Footer.vue"
+
 import vueSeamlessScroll from 'vue-seamless-scroll'
 export default {
   components: {
     Header,
-    vueSeamlessScroll
+    vueSeamlessScroll,
+    Footer
   },
   data() {
     return {
@@ -582,7 +586,7 @@ export default {
   /* background-color: #d3dce6; */
 }
 .section_map {
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
   margin: 0 auto;
 }
 /* 主要产品 */
@@ -607,6 +611,7 @@ export default {
   max-width: 1190px;
   height: 100%;
   margin: 0 auto;
+  padding-bottom: 40px;
   /* background-color: #ddd; */
 }
 
