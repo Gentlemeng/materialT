@@ -2,12 +2,13 @@
     <div class="wrapper">
         <Header :isShowMenu="isShowMenu" v-on:isShowMenu="getIsShowMenu"></Header>
         <div :class="[isShowMenu? 'active' : '','main']">
-            <div class="aaa">
+            <div class="router_wrap">
                 <transition name="move" mode="out-in"><router-view></router-view></transition>
                 <div :class="[isShowMenu? 'active' : '','main_layer']" v-show="isShowMenu"></div>   
             </div>
             
         </div>
+        <Footer></Footer>
         <!-- 移动端导航侧边栏 -->
         <nav :class="[isShowMenu? 'active' : '','mobile_nav']">
             <ul class="mobile_nav_ul">
@@ -23,12 +24,14 @@
 </template>
 
 <script>
-import Header from "./common/Header.vue"
-  import navData from "./../navData.js"
+    import Header from "./common/Header.vue"
+    import Footer from "./common/Footer.vue"
+    import navData from "./../navData.js"
 
     export default {
         components:{
             Header,
+            Footer
         },
         data(){
             return {
@@ -46,7 +49,7 @@ import Header from "./common/Header.vue"
             // let layer = document.getElementsByClassName("mobile_nav")[0];
             // debugger;
             layer.addEventListener('touchstart', function (e) {
-                // console.log("aaa")
+                // console.log("router_wrap")
                 layer.addEventListener("touchmove", function (e) {
                 e.preventDefault();
                 })
@@ -164,7 +167,7 @@ import Header from "./common/Header.vue"
             flex:1;
             overflow: hidden;
         }
-        .main .aaa{
+        .main .router_wrap{
             width:100%;
             height:100%;
             overflow-y: scroll;

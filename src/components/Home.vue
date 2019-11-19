@@ -86,7 +86,7 @@
         <!-- </div> -->
 
       </div>
-      <Footer></Footer>
+      
     </section>
     <!-- <section class="section">
         <h3>Section 3</h3>
@@ -104,14 +104,13 @@ require('echarts/lib/chart/map')
 require('echarts/lib/component/geo')
 
 import Header from "./common/Header.vue"
-import Footer from "./common/Footer.vue"
+
 
 import vueSeamlessScroll from 'vue-seamless-scroll'
 export default {
   components: {
     Header,
     vueSeamlessScroll,
-    Footer
   },
   data() {
     return {
